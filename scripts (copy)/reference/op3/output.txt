@@ -1,0 +1,698 @@
+[user@acelaptop ~]$ ls
+ 2021-ACE-CAPSTONE-INTRO.odp   Documents   go         Pictures    Videos                   windows
+ a.txt                         Downloads   Music      Public     'VirtualBox VMs'          WireGuard-VPN-Scripts
+ Desktop                       fbs         onedrive   Templates   visual-studio-code-bin
+[user@acelaptop ~]$ cd Desktop/kinetic/IcarusUI/
+[user@acelaptop IcarusUI]$ ./build.sh 
+Building all Go projects...
+Done
+[user@acelaptop IcarusUI]$ ls
+ addallvehicles      goto.go           land.go       operatecam             status         'Unsaved 1.glade~'
+ addallvehicles.go   IcarusUI.glade    launch        operatecam.go          status_all
+ assets.csv          IcarusUI.glade~   launch.go    'real assets.csv'       status_all.go
+ build.sh            IcarusUI.py       loadFuel      removeallvehicles      status.go
+ goto                land              loadFuel.go   removeallvehicles.go  'To Do.txt'
+[user@acelaptop IcarusUI]$ cd ..
+[user@acelaptop kinetic]$ ls
+addVehicle.go      CLI_Scripts  IcarusUI    loadFuel.go  op3            README.md
+changDirection.go  examples     landNow.go  op1          operatecam.go  status.go
+[user@acelaptop kinetic]$ cd op
+op1/ op3/ 
+[user@acelaptop kinetic]$ cd op3
+[user@acelaptop op3]$ ls
+ addallvehicles.go   assets.csv   op3.go  'real assets.csv'   sorties.csv   test.go
+[user@acelaptop op3]$ go run addallvehicles.go 
+{0 NewVehicle [{0 KIRINKI-101 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+{1 NewVehicle [] {0 0  [] [] map[] map[]} false Unable to connect to vehicle (1: 10.59.144.230:61379)} true
+{2 NewVehicle [{2 KIRINKI-103 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+{3 NewVehicle [{3 KIRINKI-104 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+All vehicles added.
+[user@acelaptop op3]$ go run test.go 0 49.1819 400 -68.3639 120
+Moving vehicle 0 to 49.1819 -68 400.0000 at 120 meters/sec.
+Moving vehicle 0 to linger at 49.1819 -68 400.0000.
+^Csignal: interrupt
+[user@acelaptop op3]$ go run land.go 0
+Landing vehicle 0.
+[user@acelaptop op3]$ go run test.go 0 49.1819 -68.3639 400 120
+Moving vehicle 0 to 49.1819 400 -68.3639 at 120 meters/sec.
+Moving vehicle 0 to linger at 49.1819 400 -68.3639.
+^Csignal: interrupt
+[user@acelaptop op3]$ go run land.go 0
+Landing vehicle 0.
+[user@acelaptop op3]$ go run test.go 0 49.1819 -68.3639 400 120
+Moving vehicle 0 to 49.1819 400 -68.3639 at 120 meters/sec.
+^Csignal: interrupt
+[user@acelaptop op3]$ go run test.go 0 49.1819 -68.3639 100 120 
+Moving vehicle 0 to 49.1819 100 -68.3639 at 120 meters/sec.
+HUGE
+[user@acelaptop op3]$ go run land.go 0
+Landing vehicle 0.
+[user@acelaptop op3]$ go run test.go 0 49.2213 -68.1618 100 120        
+Moving vehicle 0 to 49.2213 100 -68.1618 at 120 meters/sec.
+Moving vehicle 0 to linger at 49.2213 100 -68.1618.
+Vehicle 0 taking picture...
+Vehicle 0 picture complete
+
+Images returned by vehicle 0: [] 
+[user@acelaptop op3]$ go run test.go 0 49.1819 -68.3639 100 120
+Moving vehicle 0 to 49.1819 100 -68.3639 at 120 meters/sec.
+^Csignal: interrupt
+[user@acelaptop op3]$ go run test.go 0 49.1819 -68.3639 100 120
+Moving vehicle 0 to 49.1819 100 -68.3639 at 120 meters/sec.
+Vehicle 0 taking picture...
+Vehicle 0 picture complete
+
+Images returned by vehicle 0: [] 
+[user@acelaptop op3]$ go run land.go 0
+Landing vehicle 0.
+[user@acelaptop op3]$ go run test.go 0 49.1819 -68.3639 100 20
+Moving vehicle 0 to 49.1819 100 -68.3639 at 20 meters/sec.
+Vehicle 0 taking picture...
+Vehicle 0 picture complete
+
+Images returned by vehicle 0: [] 
+[user@acelaptop op3]$ go run test.go 0 49.1819 -68.3639 100 20
+Moving vehicle 0 to 49.1819 100 -68.3639 at 20 meters/sec.
+Vehicle 0 taking picture...
+Vehicle 0 picture complete
+
+Images returned by vehicle 0: [] 
+[user@acelaptop op3]$ go run op3.go 
+00:00:00%!(EXTRA string= )exit status 1
+[user@acelaptop op3]$ go run op3.go 
+00:00:00 exit status 1
+[user@acelaptop op3]$ go run op3.go 
+21:46:25 exit status 1
+[user@acelaptop op3]$ go run op3.go 
+21:55:39 {0 NewVehicle [{0 KIRINKI-101 {2 8 true} {49.6165 -67.7075 0 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 100  true map[] map[]} 11:{AllRadar 43000  true map[] map[2096:{4 49.6165 -67.7075 0 0 0} 2097:{4 49.6165 -67.7075 0 0 0} 2098:{4 49.6165 -67.7075 0 0 0}]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+21:55:40 {1 NewVehicle [{1 KIRINKI-102 {2 8 true} {49.6165 -67.7075 0 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 100  true map[] map[]} 11:{AllRadar 43000  true map[] map[2095:{4 49.6165 -67.7075 0 0 0} 2097:{4 49.6165 -67.7075 0 0 0} 2098:{4 49.6165 -67.7075 0 0 0}]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+21:55:40 {2 NewVehicle [{2 KIRINKI-103 {2 8 true} {49.6165 -67.7075 0 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 100  true map[] map[]} 11:{AllRadar 43000  true map[] map[2095:{4 49.6165 -67.7075 0 0 0} 2096:{4 49.6165 -67.7075 0 0 0} 2098:{4 49.6165 -67.7075 0 0 0}]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+21:55:41 {3 NewVehicle [{3 KIRINKI-104 {2 8 true} {49.6165 -67.7075 0 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 100  true map[] map[]} 11:{AllRadar 43000  true map[] map[2095:{4 49.6165 -67.7075 0 0 0} 2096:{4 49.6165 -67.7075 0 0 0} 2097:{4 49.6165 -67.7075 0 0 0}]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+21:55:41 All vehicles added.
+21:55:42 All Vehicles Status:
+=---= KIRINKI-102 [1] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-103 [2] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-104 [3] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-101 [0] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+21:55:42 Active ID: 
+21:55:42 Active ID: 
+21:55:42 Active ID: 
+21:55:42 Active ID: 
+panic: runtime error: index out of range [1] with length 0
+
+goroutine 1 [running]:
+main.main()
+        /home/user/Desktop/kinetic/op3/op3.go:137 +0x137f
+exit status 2
+[user@acelaptop op3]$ go run op3.go 
+22:05:04 {0 NewVehicle [{4 KIRINKI-101 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+22:05:04 {1 NewVehicle [{5 KIRINKI-102 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+22:05:05 {2 NewVehicle [{6 KIRINKI-103 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+22:05:06 {3 NewVehicle [{7 KIRINKI-104 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+22:05:06 All vehicles added.
+22:05:07 All Vehicles Status:
+=---= KIRINKI-102 [5] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-103 [6] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-104 [7] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-101 [4] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+22:05:07 Active ID: 
+22:05:07 Active ID: 
+22:05:07 Active ID: 
+22:05:07 Active ID: 
+22:05:07 panic: runtime error: index out of range [1] with length 1
+
+goroutine 1 [running]:
+main.main()
+        /home/user/Desktop/kinetic/op3/op3.go:142 +0x13b0
+exit status 2
+[user@acelaptop op3]$ go run op3.go 
+22:11:18 {0 NewVehicle [{4 KIRINKI-101 {2 8 true} {49.6165 -67.7075 0 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 100  true map[] map[]} 11:{AllRadar 43000  true map[] map[2096:{4 49.6165 -67.7075 0 0 0} 2097:{4 49.6165 -67.7075 0 0 0} 2098:{4 49.6165 -67.7075 0 0 0}]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+22:11:18 {1 NewVehicle [{5 KIRINKI-102 {2 8 true} {49.6165 -67.7075 0 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 100  true map[] map[]} 11:{AllRadar 43000  true map[] map[2095:{4 49.6165 -67.7075 0 0 0} 2097:{4 49.6165 -67.7075 0 0 0} 2098:{4 49.6165 -67.7075 0 0 0}]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+22:11:19 {2 NewVehicle [{6 KIRINKI-103 {2 8 true} {49.6165 -67.7075 0 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 100  true map[] map[]} 11:{AllRadar 43000  true map[] map[2095:{4 49.6165 -67.7075 0 0 0} 2096:{4 49.6165 -67.7075 0 0 0} 2098:{4 49.6165 -67.7075 0 0 0}]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+22:11:19 {3 NewVehicle [{7 KIRINKI-104 {2 8 true} {49.6165 -67.7075 0 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 100  true map[] map[]} 11:{AllRadar 43000  true map[] map[2095:{4 49.6165 -67.7075 0 0 0} 2096:{4 49.6165 -67.7075 0 0 0} 2097:{4 49.6165 -67.7075 0 0 0}]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+22:11:19 All vehicles added.
+22:11:20 All Vehicles Status:
+=---= KIRINKI-101 [4] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-102 [5] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-103 [6] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-104 [7] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+22:11:21 Active ID: 
+22:11:21 Active ID: 
+22:11:21 Active ID: 
+22:11:21 Active ID: 
+22:11:21 Drone 0 - Waypoint 0: 50.3271, -60.3453
+22:11:21 Drone 0 - Waypoint 1: 50.5519, -60.3453
+22:11:21 Drone 0 - Waypoint 2: 50.5934, -60.2669
+22:11:21 Drone 0 - Waypoint 3: 50.6680, -59.6528
+22:11:21 Drone 0 - Waypoint 4: 50.7425, -60.7111
+22:11:21 Drone 0 - Waypoint 5: 50.8086, -60.9855
+22:11:21 Drone 1 - Waypoint 0: 50.3501, -64.6720
+22:11:21 Drone 1 - Waypoint 1: 50.4762, -64.2656
+22:11:21 Drone 1 - Waypoint 2: 50.5112, -64.3534
+22:11:21 Drone 1 - Waypoint 3: 50.6717, -64.1227
+22:11:21 Drone 1 - Waypoint 4: 50.6647, -64.7709
+22:11:21 Drone 2 - Waypoint 0: 49.9699, -67.1549
+22:11:21 Drone 2 - Waypoint 1: 50.4202, -67.2208
+22:11:21 Drone 2 - Waypoint 2: 50.2659, -67.4625
+22:11:21 Drone 2 - Waypoint 3: 50.0899, -67.5394
+22:11:21 Drone 2 - Waypoint 4: 50.2307, -68.2316
+22:11:21 Drone 2 - Waypoint 5: 50.4482, -68.0338
+22:11:21 Launching vehicle 6.
+22:11:22 Moving vehicle 6 to 49.9699 600 -67.1549 at 120 meters/sec.
+22:12:22 Launching vehicle 5.
+22:12:22 Moving vehicle 5 to 50.3501 400 -64.6720 at 120 meters/sec.
+[user@acelaptop op3]$ go run op3.go 
+22:19:05 {0 NewVehicle [{8 KIRINKI-101 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+22:19:06 {1 NewVehicle [{9 KIRINKI-102 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+22:19:06 {2 NewVehicle [{10 KIRINKI-103 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+22:19:07 {3 NewVehicle [{11 KIRINKI-104 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+22:19:07 All vehicles added.
+22:19:07 All Vehicles Status:
+=---= KIRINKI-103 [10] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-104 [11] // Team # 1 =-----------------------=
+DESTROYED
+
+=---= KIRINKI-101 [8] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-102 [9] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+22:19:09 Active ID: 8
+22:19:09 Active ID: 9
+22:19:09 Active ID: 10
+22:19:09 Active ID: 11
+22:19:09 Drone 0 - Waypoint 0: 50.3271, -60.3453
+22:19:09 Drone 0 - Waypoint 1: 50.5519, -60.3453
+22:19:09 Drone 0 - Waypoint 2: 50.5934, -60.2669
+22:19:09 Drone 0 - Waypoint 3: 50.6680, -59.6528
+22:19:09 Drone 0 - Waypoint 4: 50.7425, -60.7111
+22:19:09 Drone 0 - Waypoint 5: 50.8086, -60.9855
+22:19:09 Drone 1 - Waypoint 0: 50.3501, -64.6720
+22:19:09 Drone 1 - Waypoint 1: 50.4762, -64.2656
+22:19:09 Drone 1 - Waypoint 2: 50.5112, -64.3534
+22:19:09 Drone 1 - Waypoint 3: 50.6717, -64.1227
+22:19:09 Drone 1 - Waypoint 4: 50.6647, -64.7709
+22:19:09 Drone 2 - Waypoint 0: 49.9699, -67.1549
+22:19:09 Drone 2 - Waypoint 1: 50.4202, -67.2208
+22:19:09 Drone 2 - Waypoint 2: 50.2659, -67.4625
+22:19:09 Drone 2 - Waypoint 3: 50.0899, -67.5394
+22:19:09 Drone 2 - Waypoint 4: 50.2307, -68.2316
+22:19:09 Drone 2 - Waypoint 5: 50.4482, -68.0338
+22:19:09 GO JOHNNY22:19:09 Launching vehicle 10.
+22:19:10 Moving vehicle 10 to 49.9699 600 -67.1549 at 120 meters/sec.
+^Csignal: interrupt
+[user@acelaptop op3]$ go run op3.go 
+22:28:55 {0 NewVehicle [{16 KIRINKI-101 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+22:28:55 {1 NewVehicle [{17 KIRINKI-102 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+22:28:56 {2 NewVehicle [{18 KIRINKI-103 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+22:28:56 {3 NewVehicle [{19 KIRINKI-104 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+22:28:56 All vehicles added.
+22:28:57 All Vehicles Status:
+=---= KIRINKI-102 [17] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-103 [18] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-104 [19] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-101 [16] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+22:28:58 Active ID: 16
+22:28:58 Active ID: 17
+22:28:58 Active ID: 18
+22:28:58 Active ID: 19
+22:28:58 Drone 0 - Waypoint 0: 50.3271, -60.3453
+22:28:58 Drone 0 - Waypoint 1: 50.5519, -60.3453
+22:28:58 Drone 0 - Waypoint 2: 50.5934, -60.2669
+22:28:58 Drone 0 - Waypoint 3: 50.6680, -59.6528
+22:28:58 Drone 0 - Waypoint 4: 50.7425, -60.7111
+22:28:58 Drone 0 - Waypoint 5: 50.8086, -60.9855
+22:28:58 Drone 1 - Waypoint 0: 50.3501, -64.6720
+22:28:58 Drone 1 - Waypoint 1: 50.4762, -64.2656
+22:28:58 Drone 1 - Waypoint 2: 50.5112, -64.3534
+22:28:58 Drone 1 - Waypoint 3: 50.6717, -64.1227
+22:28:58 Drone 1 - Waypoint 4: 50.6647, -64.7709
+22:28:58 Drone 2 - Waypoint 0: 49.9699, -67.1549
+22:28:58 Drone 2 - Waypoint 1: 50.4202, -67.2208
+22:28:58 Drone 2 - Waypoint 2: 50.2659, -67.4625
+22:28:58 Drone 2 - Waypoint 3: 50.0899, -67.5394
+22:28:58 Drone 2 - Waypoint 4: 50.2307, -68.2316
+22:28:58 Drone 2 - Waypoint 5: 50.4482, -68.0338
+22:28:58  GO JOHNNY
+22:28:58 Launching vehicle 18.
+22:28:59 Moving vehicle 18 to 49.9699 600 -67.1549 at 120 meters/sec.
+22:29:58  GO FRANCIS
+22:29:59 Launching vehicle 17.
+22:30:00 Moving vehicle 17 to 50.3501 400 -64.6720 at 120 meters/sec.
+22:30:18  GO BABY
+22:30:19 Launching vehicle 16.
+22:30:20 Moving vehicle 16 to 50.3271 200 -60.3453 at 120 meters/sec.
+22:36:58 Vehicle 18 taking picture.
+22:37:00 Images returned by vehicle 18: []
+22:37:03 Moving vehicle 18 to 50.4202 600 -67.2208 at 120 meters/sec.
+Execute dial error: EOF
+22:44:57 No response
+exit status 1
+[user@acelaptop op3]$ go run op3.go 
+23:11:19 {0 NewVehicle [{0 KIRINKI-101 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+23:11:19 {1 NewVehicle [{1 KIRINKI-102 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+23:11:20 {2 NewVehicle [{2 KIRINKI-103 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+23:11:20 {3 NewVehicle [{3 KIRINKI-104 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+23:11:20 All vehicles added.
+23:11:21 All Vehicles Status:
+=---= KIRINKI-101 [0] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-102 [1] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-103 [2] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-104 [3] // Team # 1 =-----------------------=
+DESTROYED
+
+23:11:22 Active ID: 0
+23:11:22 Active ID: 1
+23:11:22 Active ID: 2
+23:11:22 Active ID: 3
+23:11:22 Drone 0 - Waypoint 0: 50.3271, -60.3453
+23:11:22 Drone 0 - Waypoint 1: 50.5519, -60.3453
+23:11:22 Drone 0 - Waypoint 2: 50.5934, -60.2669
+23:11:22 Drone 0 - Waypoint 3: 50.6680, -59.6528
+23:11:22 Drone 0 - Waypoint 4: 50.7425, -60.7111
+23:11:22 Drone 0 - Waypoint 5: 50.8086, -60.9855
+23:11:22 Drone 1 - Waypoint 0: 50.3501, -64.6720
+23:11:22 Drone 1 - Waypoint 1: 50.4762, -64.2656
+23:11:22 Drone 1 - Waypoint 2: 50.5112, -64.3534
+23:11:22 Drone 1 - Waypoint 3: 50.6717, -64.1227
+23:11:22 Drone 1 - Waypoint 4: 50.6647, -64.7709
+23:11:22 Drone 2 - Waypoint 0: 49.9699, -67.1549
+23:11:22 Drone 2 - Waypoint 1: 50.4202, -67.2208
+23:11:22 Drone 2 - Waypoint 2: 50.2659, -67.4625
+23:11:22 Drone 2 - Waypoint 3: 50.0899, -67.5394
+23:11:22 Drone 2 - Waypoint 4: 50.2307, -68.2316
+23:11:22 Drone 2 - Waypoint 5: 50.4482, -68.0338
+23:11:22 GO JOHNNY
+23:11:22 Launching vehicle 2.
+23:11:23 Moving vehicle 2 to 49.9699 600 -67.1549 at 120 meters/sec.
+23:12:22 GO FRANCIS
+23:12:22 Launching vehicle 1.
+23:12:23 Moving vehicle 1 to 50.3501 400 -64.6720 at 120 meters/sec.
+23:12:42 GO BABY
+23:12:43 Launching vehicle 0.
+23:12:44 Moving vehicle 0 to 50.3271 200 -60.3453 at 120 meters/sec.
+23:19:22 Vehicle 2 taking picture.
+23:19:23 Image returned by vehicle 2: []
+23:19:25 Moving vehicle 2 to 50.4202 600 -67.2208 at 120 meters/sec.
+23:26:28 Vehicle 2 taking picture.
+23:26:30 Image returned by vehicle 2: []
+23:26:32 Moving vehicle 2 to 50.2659 600 -67.4625 at 120 meters/sec.
+23:30:28 Vehicle 2 taking picture.
+23:30:30 Image returned by vehicle 2: []
+23:30:32 Moving vehicle 2 to 50.0899 600 -67.5394 at 120 meters/sec.
+Error reading from socket: websocket: close 1006 (abnormal closure): unexpected EOF
+Error reading from socket: websocket: close 1006 (abnormal closure): unexpected EOF
+23:32:55 No response
+exit status 1
+[user@acelaptop op3]$ go build op3.go 
+[user@acelaptop op3]$ go build op3.go 
+[user@acelaptop op3]$ go run op3.go   
+00:50:13 {0 NewVehicle [{0 KIRINKI-101 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+00:50:13 {1 NewVehicle [{1 KIRINKI-102 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+00:50:14 {2 NewVehicle [{2 KIRINKI-103 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+00:50:14 All vehicles added.
+00:50:14 All Vehicles Status:
+=---= KIRINKI-101 [0] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-102 [1] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-103 [2] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+00:50:15 Active ID: 0
+00:50:15 Active ID: 1
+00:50:15 Active ID: 2
+00:50:15 Drone 0 - Waypoint 0: 50.3271, -60.3453
+00:50:15 Drone 0 - Waypoint 1: 50.5519, -60.3453
+00:50:15 Drone 0 - Waypoint 2: 50.5934, -60.2669
+00:50:15 Drone 0 - Waypoint 3: 50.6680, -59.6528
+00:50:15 Drone 0 - Waypoint 4: 50.7425, -60.7111
+00:50:15 Drone 0 - Waypoint 5: 50.8086, -60.9855
+00:50:15 Drone 1 - Waypoint 0: 50.3501, -64.6720
+00:50:15 Drone 1 - Waypoint 1: 50.4762, -64.2656
+00:50:15 Drone 1 - Waypoint 2: 50.5112, -64.3534
+00:50:15 Drone 1 - Waypoint 3: 50.6717, -64.1227
+00:50:15 Drone 1 - Waypoint 4: 50.6647, -64.7709
+00:50:15 Drone 2 - Waypoint 0: 49.9699, -67.1549
+00:50:15 Drone 2 - Waypoint 1: 50.4202, -67.2208
+00:50:15 Drone 2 - Waypoint 2: 50.2659, -67.4625
+00:50:15 Drone 2 - Waypoint 3: 50.0899, -67.5394
+00:50:15 Drone 2 - Waypoint 4: 50.2307, -68.2316
+00:50:15 Drone 2 - Waypoint 5: 50.4482, -68.0338
+00:50:15 GO JOHNNY
+00:50:15 Launching vehicle 2.
+00:50:16 Moving vehicle 2 to 49.9699 600 -67.1549 at 120 meters/sec.
+00:51:15 GO FRANCIS
+00:51:16 Launching vehicle 1.
+00:51:17 Moving vehicle 1 to 50.3501 400 -64.6720 at 120 meters/sec.
+Clearing Queries
+00:51:35 GO BABY
+00:51:35 No response
+exit status 1
+[user@acelaptop op3]$ go run op3.go 
+00:56:15 {0 NewVehicle [{0 KIRINKI-101 {2 8 true} {49.6165 -67.7075 0 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 100  true map[] map[]} 11:{AllRadar 43000  true map[] map[]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+00:56:16 {1 NewVehicle [{1 KIRINKI-102 {2 8 true} {49.6165 -67.7075 0 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 100  true map[] map[]} 11:{AllRadar 43000  true map[] map[]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+00:56:17 {2 NewVehicle [{2 KIRINKI-103 {2 8 true} {49.6165 -67.7075 0 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 100  true map[] map[]} 11:{AllRadar 43000  true map[] map[]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+00:56:17 All vehicles added.
+00:56:17 All Vehicles Status:
+=---= KIRINKI-102 [1] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-103 [2] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-101 [0] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+00:56:18 Active ID: 0
+00:56:18 Active ID: 1
+00:56:18 Active ID: 2
+00:56:18 Drone 0 - Waypoint 0: 50.3271, -60.3453
+00:56:18 Drone 0 - Waypoint 1: 50.5519, -60.3453
+00:56:18 Drone 0 - Waypoint 2: 50.5934, -60.2669
+00:56:18 Drone 0 - Waypoint 3: 50.6680, -59.6528
+00:56:18 Drone 0 - Waypoint 4: 50.7425, -60.7111
+00:56:18 Drone 0 - Waypoint 5: 50.8086, -60.9855
+00:56:18 Drone 1 - Waypoint 0: 50.3501, -64.6720
+00:56:18 Drone 1 - Waypoint 1: 50.4762, -64.2656
+00:56:18 Drone 1 - Waypoint 2: 50.5112, -64.3534
+00:56:18 Drone 1 - Waypoint 3: 50.6717, -64.1227
+00:56:18 Drone 1 - Waypoint 4: 50.6647, -64.7709
+00:56:18 Drone 2 - Waypoint 0: 49.9699, -67.1549
+00:56:18 Drone 2 - Waypoint 1: 50.4202, -67.2208
+00:56:18 Drone 2 - Waypoint 2: 50.2659, -67.4625
+00:56:18 Drone 2 - Waypoint 3: 50.0899, -67.5394
+00:56:18 Drone 2 - Waypoint 4: 50.2307, -68.2316
+00:56:18 Drone 2 - Waypoint 5: 50.4482, -68.0338
+00:56:18 GO JOHNNY
+00:56:19 Launching vehicle 2.
+00:56:19 Moving vehicle 2 to 49.9699 600 -67.1549 at 120 meters/sec.
+00:57:18 GO FRANCIS
+00:57:19 Launching vehicle 1.
+00:57:20 Moving vehicle 1 to 50.3501 400 -64.6720 at 120 meters/sec.
+Clearing Queries
+00:57:38 GO BABY
+00:57:38 No response
+panic: runtime error: index out of range [0] with length 0
+
+goroutine 27 [running]:
+main.main.func1(0xc000221070, 0x4, 0x4, 0xc0000943c0, 0xc0000ad680, 0xc0000163b8, 0x40492ab020c49ba6, 0xc04e5978d4fdf3b6, 0x4049476c8b439581, 0xc04e8989374bc6a8, ...)
+        /home/user/Desktop/kinetic/op3/op3.go:190 +0x2415
+created by main.main
+        /home/user/Desktop/kinetic/op3/op3.go:158 +0xdeb
+exit status 2
+[user@acelaptop op3]$ go run op3.go 
+01:06:15 {0 NewVehicle [{0 KIRINKI-101 {2 7 true} {49.6165 -67.7075 150 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 95  true map[] map[]} 11:{AllRadar 43000  true map[] map[2098:{4 49.6165 -67.7075 0 0 0}]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+01:06:16 {1 NewVehicle [{1 KIRINKI-102 {2 7 true} {49.81364338087519 -66.89175745276762 400 1.2143202 120} map[4:{Camera 1  true map[] map[]} 5:{Fuel 95  true map[] map[]} 11:{AllRadar 43000  true map[] map[2097:{4 49.97715646447252 -67.14355330427934 600 3.9343376 0}]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+01:06:16 {2 NewVehicle [{2 KIRINKI-103 {2 7 true} {49.97752583693028 -67.14297572867048 600 3.9343371 9.238545} map[4:{Camera 1  true map[] map[]} 5:{Fuel 94  true map[] map[]} 11:{AllRadar 43000  true map[] map[2096:{4 49.81068461615364 -66.90400026944187 400 1.2143202 0}]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+01:06:16 All vehicles added.
+01:06:17 All Vehicles Status:
+=---= KIRINKI-103 [2] // Team # 1 =-----------------------=
+Coordinates:    49.9775, 600, -67.1431
+Vector:         3.9343371°N     14 m/s
+Fuel:           94
+Nav Mode:       7 (NAVIGATION)
+=---= KIRINKI-101 [0] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 150, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           95
+Nav Mode:       7 (NAVIGATION)
+=---= KIRINKI-102 [1] // Team # 1 =-----------------------=
+Coordinates:    49.8140, 400, -66.8901
+Vector:         1.2143202°N     120 m/s
+Fuel:           95
+Nav Mode:       7 (NAVIGATION)
+01:06:17 Active ID: 0
+01:06:17 Active ID: 1
+01:06:17 Active ID: 2
+01:06:17 Drone 0 - Waypoint 0: 50.3271, -60.3453
+01:06:17 Drone 0 - Waypoint 1: 50.5519, -60.3453
+01:06:17 Drone 0 - Waypoint 2: 50.5934, -60.2669
+01:06:17 Drone 0 - Waypoint 3: 50.6680, -59.6528
+01:06:17 Drone 0 - Waypoint 4: 50.7425, -60.7111
+01:06:17 Drone 0 - Waypoint 5: 50.8086, -60.9855
+01:06:17 Drone 1 - Waypoint 0: 50.3501, -64.6720
+01:06:17 Drone 1 - Waypoint 1: 50.4762, -64.2656
+01:06:17 Drone 1 - Waypoint 2: 50.5112, -64.3534
+01:06:17 Drone 1 - Waypoint 3: 50.6717, -64.1227
+01:06:17 Drone 1 - Waypoint 4: 50.6647, -64.7709
+01:06:17 Drone 2 - Waypoint 0: 49.9699, -67.1549
+01:06:17 Drone 2 - Waypoint 1: 50.4202, -67.2208
+01:06:17 Drone 2 - Waypoint 2: 50.2659, -67.4625
+01:06:17 Drone 2 - Waypoint 3: 50.0899, -67.5394
+01:06:17 Drone 2 - Waypoint 4: 50.2307, -68.2316
+01:06:17 Drone 2 - Waypoint 5: 50.4482, -68.0338
+01:06:17 GO JOHNNY
+01:06:18 Launching vehicle 2.
+01:06:19 Moving vehicle 2 to 49.9699 600 -67.1549 at 120 meters/sec.
+01:06:36 Vehicle 2 taking picture.
+01:06:36 Image returned by vehicle 2: []
+01:06:37 Moving vehicle 2 to 50.4202 600 -67.2208 at 120 meters/sec.
+^Csignal: interrupt
+[user@acelaptop op3]$ go run op3.go 
+01:08:35 {0 NewVehicle [{0 KIRINKI-101 {2 8 true} {49.6165 -67.7075 0 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 100  true map[] map[]} 11:{AllRadar 43000  true map[] map[]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+01:08:36 {1 NewVehicle [{1 KIRINKI-102 {2 8 true} {49.6165 -67.7075 0 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 100  true map[] map[]} 11:{AllRadar 43000  true map[] map[]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+01:08:36 {2 NewVehicle [{2 KIRINKI-103 {2 8 true} {49.6165 -67.7075 0 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 100  true map[] map[]} 11:{AllRadar 43000  true map[] map[]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+01:08:36 All vehicles added.
+01:08:37 All Vehicles Status:
+=---= KIRINKI-101 [0] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-102 [1] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-103 [2] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+01:08:38 Active ID: 0
+01:08:38 Active ID: 1
+01:08:38 Active ID: 2
+01:08:38 Drone 0 - Waypoint 0: 50.3271, -60.3453
+01:08:38 Drone 0 - Waypoint 1: 50.5519, -60.3453
+01:08:38 Drone 0 - Waypoint 2: 50.5934, -60.2669
+01:08:38 Drone 0 - Waypoint 3: 50.6680, -59.6528
+01:08:38 Drone 0 - Waypoint 4: 50.7425, -60.7111
+01:08:38 Drone 0 - Waypoint 5: 50.8086, -60.9855
+01:08:38 Drone 1 - Waypoint 0: 50.3501, -64.6720
+01:08:38 Drone 1 - Waypoint 1: 50.4762, -64.2656
+01:08:38 Drone 1 - Waypoint 2: 50.5112, -64.3534
+01:08:38 Drone 1 - Waypoint 3: 50.6717, -64.1227
+01:08:38 Drone 1 - Waypoint 4: 50.6647, -64.7709
+01:08:38 Drone 2 - Waypoint 0: 49.9699, -67.1549
+01:08:38 Drone 2 - Waypoint 1: 50.4202, -67.2208
+01:08:38 Drone 2 - Waypoint 2: 50.2659, -67.4625
+01:08:38 Drone 2 - Waypoint 3: 50.0899, -67.5394
+01:08:38 Drone 2 - Waypoint 4: 50.2307, -68.2316
+01:08:38 Drone 2 - Waypoint 5: 50.4482, -68.0338
+01:08:38 GO JOHNNY
+01:08:39 Launching vehicle 2.
+01:08:39 Moving vehicle 2 to 49.9699 600 -67.1549 at 120 meters/sec.
+01:09:38 GO FRANCIS
+01:09:39 Launching vehicle 1.
+01:09:39 Moving vehicle 1 to 50.3501 400 -64.6720 at 120 meters/sec.
+01:09:58 GO BABY
+01:09:59 Launching vehicle 0.
+01:09:59 Moving vehicle 0 to 50.3271 200 -60.3453 at 120 meters/sec.
+01:16:38 Vehicle 2 taking picture.
+01:16:40 Image returned by vehicle 2: []
+01:16:41 Moving vehicle 2 to 50.4202 600 -67.2208 at 120 meters/sec.
+01:23:44 Vehicle 2 taking picture.
+01:23:47 Image returned by vehicle 2: []
+01:23:48 Moving vehicle 2 to 50.2659 600 -67.4625 at 120 meters/sec.
+01:27:45 Vehicle 2 taking picture.
+01:27:48 Image returned by vehicle 2: [20210625T052746-20210625T052746-ISR-Image.jpg]
+01:27:50 Moving vehicle 2 to 50.0899 600 -67.5394 at 120 meters/sec.
+01:30:37 Vehicle 2 taking picture.
+01:30:40 Image returned by vehicle 2: [20210625T053039-20210625T053039-ISR-Image.jpg]
+01:30:41 Moving vehicle 2 to 50.2307 600 -68.2316 at 120 meters/sec.
+Error reading from socket: websocket: close 1006 (abnormal closure): unexpected EOF
+01:32:45 No response
+exit status 1
+[user@acelaptop op3]$ go run op3.go 
+01:46:48 {0 NewVehicle [{0 KIRINKI-101 {2 7 true} {49.9653679012403 -64.09304001911222 200 1.4231546 120} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+^Csignal: interrupt
+[user@acelaptop op3]$ go run op3.go 
+01:51:33 {0 NewVehicle [{0 KIRINKI-101 {2 8 true} {49.6165 -67.7075 0 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 100  true map[] map[]} 11:{AllRadar 43000  true map[] map[2096:{4 49.6165 -67.7075 0 0 0} 2097:{4 49.6165 -67.7075 0 0 0} 2098:{4 49.6165 -67.7075 0 0 0}]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+01:51:34 {1 NewVehicle [{1 KIRINKI-102 {2 8 true} {49.6165 -67.7075 0 0 0} map[4:{Camera 1  true map[] map[]} 5:{Fuel 100  true map[] map[]} 11:{AllRadar 43000  true map[] map[2095:{4 49.6165 -67.7075 0 0 0} 2097:{4 49.6165 -67.7075 0 0 0} 2098:{4 49.6165 -67.7075 0 0 0}]}] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 true {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+01:51:34 {2 NewVehicle [{2 KIRINKI-103 {2 8 true} {49.6165 -67.7075 0 0 0} map[] [] {0 {{0 0 0} 0 0 0 0} <nil>} 0 false {   0 0 [] [] [] 0 0 0}}] {0 0  [] [] map[] map[]} true } true
+01:51:34 All vehicles added.
+01:51:35 All Vehicles Status:
+=---= KIRINKI-101 [0] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-102 [1] // Team # 1 =-----------------------=
+Coordinates:    49.6165, 0, -67.7075
+Vector:         0°N     0 m/s
+Fuel:           100
+Nav Mode:       8 (LAND_NOW)
+=---= KIRINKI-103 [2] // Team # 1 =-----------------------=
+DESTROYED
+
+01:51:35 Active ID: 0
+01:51:35 Active ID: 1
+01:51:35 Active ID: 2
+01:51:35 Drone 0 - Waypoint 0: 50.3271, -60.3453
+01:51:35 Drone 0 - Waypoint 1: 50.5519, -60.3453
+01:51:35 Drone 0 - Waypoint 2: 50.5934, -60.2669
+01:51:35 Drone 0 - Waypoint 3: 50.6680, -59.6528
+01:51:35 Drone 0 - Waypoint 4: 50.7425, -60.7111
+01:51:35 Drone 0 - Waypoint 5: 50.8086, -60.9855
+01:51:35 Drone 1 - Waypoint 0: 50.3501, -64.6720
+01:51:35 Drone 1 - Waypoint 1: 50.4762, -64.2656
+01:51:35 Drone 1 - Waypoint 2: 50.5112, -64.3534
+01:51:35 Drone 1 - Waypoint 3: 50.6717, -64.1227
+01:51:35 Drone 1 - Waypoint 4: 50.6647, -64.7709
+01:51:35 Drone 2 - Waypoint 0: 49.9699, -67.1549
+01:51:35 Drone 2 - Waypoint 1: 50.4202, -67.2208
+01:51:35 Drone 2 - Waypoint 2: 50.2659, -67.4625
+01:51:35 Drone 2 - Waypoint 3: 50.0899, -67.5394
+01:51:35 Drone 2 - Waypoint 4: 50.2307, -68.2316
+01:51:35 Drone 2 - Waypoint 5: 50.4482, -68.0338
+01:51:35 GO JOHNNY
+01:51:36 Launching vehicle 2.
+01:51:37 Moving vehicle 2 to 49.9699 600 -67.1549 at 120 meters/sec.
+02:00:24 Vehicle 2 taking picture.
+02:00:25 Image returned by vehicle 2: []
+
+Print radar info:
+02:00:27 Moving vehicle 2 to 50.4202 600 -67.2208 at 120 meters/sec.
+02:07:57 Vehicle 2 taking picture.
+02:07:58 Image returned by vehicle 2: []
+
+Print radar info:
+02:08:00 Moving vehicle 2 to 50.2659 600 -67.4625 at 120 meters/sec.
+02:13:35 Vehicle 2 taking picture.
+02:13:36 Image returned by vehicle 2: []
+
+Print radar info:
+02:13:39 Moving vehicle 2 to 50.0899 600 -67.5394 at 120 meters/sec.
+02:15:35 GO FRANCIS
+02:15:37 Launching vehicle 1.
+02:15:37 Moving vehicle 1 to 50.3501 400 -64.6720 at 120 meters/sec.
+02:16:29 Vehicle 2 taking picture.
+02:16:30 Image returned by vehicle 2: [20210625T061630-ISR-Image.jpg]
+
+Print radar info:
+02:16:34 Moving vehicle 2 to 50.2307 600 -68.2316 at 120 meters/sec.
+02:24:56 Vehicle 2 taking picture.
+02:24:57 Image returned by vehicle 2: []
+
+Print radar info:
+02:25:01 Moving vehicle 2 to 50.4482 600 -68.0338 at 120 meters/sec.
+02:30:43 Vehicle 2 taking picture.
+02:30:45 Image returned by vehicle 2: [20210625T063044-ISR-Image.jpg]
+
+Print radar info:
+02:30:50 Moving vehicle 2 to base at 49.6165 600 -67.7075 at 120 meters/sec.
+02:44:38 Landing vehicle 2.
+Error reading from socket: websocket: close 1000 (normal): Unauthorized user
+02:51:37 No response
+exit status 1
+[user@acelaptop op3]$ 

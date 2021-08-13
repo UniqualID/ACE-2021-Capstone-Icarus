@@ -1,0 +1,4 @@
+VehicleID,Latitude,Longitude,Altitude,Heading,Velocity,Linger
+0,43.0344,-75.6543,25,0,1,60
+0,43.0354,-75.6573,30,0,1,0
+1,43.0354,-75.6573,35,0,1.5,600

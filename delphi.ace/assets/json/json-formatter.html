@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Delphi JSON Information Formatter</title>
+        <link rel="stylesheet" href="style.css">
+        <script type="text/javascript" src="script.js"></script>
+    </head>
+
+    <body>
+        <section class="contact-form">
+            <h1>Delphi JSON Formatter</h1>
+            <p>Input the following.</p>
+            
+            <form onsubmit="handleFormSubmit()">
+              <div class="input-group">
+                <label for="delphi-id">Radar ID</label>
+                <input id="delphi-id" name="id" type="number"/>
+              </div>
+              
+              <div class="input-group">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text"/>
+              </div>
+          
+              <div class="input-group">   
+                <input id="team-valinar" name="team" type="radio" value="Valinar"/>
+                <label class="inline" for="team-valinar">Valinar</label>
+                
+                <input id="team-halycon" name="team" type="radio" value="Halycon"/>
+                <label class="inline" for="team-halycon">Halycon</label>
+                
+                <input id="team-malazan" name="team" type="radio" value="Malazan"/>
+                <label class="inline" for="team-malazan">Malazan</label>
+                
+                <input id="team-gallifrey" name="team" type="radio" value="Gallifrey"/>
+                <label class="inline" for="team-gallifrey">Gallifrey</label>
+              </div>
+              
+              
+              <div class="input-group">
+                <label for="type">Type of asset</label>
+                <select id="type" name="type">
+                  <option>Airbase</option>
+                  <option>Depot</option>
+                  <option>Datacenter</option>
+                  <option>Fort</option>
+                  <option>WMD-PRODUCTION</option>
+                  <option>ENCAMPMENT</option>
+                  <option>AnimalHospital</option>
+                  <option>EMBASSY</option>
+                  <option>NETWORK-NODE</option>
+                  <option>INSTALLATION</option>
+                  <option>MYSTERY</option>
+                  <option>FIGHTER</option>
+                  <option>BOMBER</option>
+                  <option>ISR</option>
+                  <option>ROVER</option>
+                  <option>MULTI</option>
+                  <option>WMD</option>
+                  <option>SAM</option>
+                  <option>RADAR</option>
+                  <option>LOGISTICS</option>
+                  <option>SPEC-OPS</option>
+                </select>
+              </div>
+              
+              
+              <div class="input-group">
+                <label for="hitpoints">Hitpoints (probably 100)</label>
+                <input id="hitpoints" name="hitpoints" type="number" value="100"/>
+              </div>
+              
+              <div class="input-group">
+                <label for="latitude">Latitude</label>
+                <input id="latitude" name="latitude" type="number" step="0.00001"/>
+              </div>
+              
+              <div class="input-group">
+                <label for="longitude">Longitude</label>
+                <input id="longitude" name="longitude" type="number" step="0.00001"/>
+              </div>
+              
+              <div class="input-group">
+                <label for="color">Color (val=red, mala=blue, halc=green, galli=purple)</label>
+                <select id="color" name="color">
+                  <option>red</option>
+                  <option>blue</option>
+                  <option>green</option>
+                  <option>purple</option>
+                </select>
+              </div>
+          
+              <button type="submit">Add Asset</button>
+              <button onclick="save()">Save to json</button>
+            </form>
+          </section>
+          
+          
+          
+          <div class="results">
+            <h2>Form Data</h2>
+            <pre></pre>
+          </div>
+    </body>

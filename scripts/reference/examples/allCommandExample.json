@@ -1,0 +1,544 @@
+//An Icarus query containing an example of all query types
+[
+	{
+		"QueryId": 1,
+		"Type": 3,
+		"VehicleId": 0,
+		"VehicleCallsign": "Test Vehicle 2",
+		"DaedalusQuery": null,
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "127.0.0.1",
+			"C3poPort": "5001",
+			"DaedalusPort": "44444",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": [],
+			"DaedalusCert": "",
+			"DaedalusKey": ""
+		}
+	},
+	{
+		"QueryId": 2,
+		"Type": 0,
+		"VehicleId": 0,
+		"VehicleCallsign": "",
+		"DaedalusQuery": null,
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": ""
+		}
+	},
+	{
+		"QueryId": 3,
+		"Type": 1,
+		"VehicleId": 0,
+		"VehicleCallsign": "",
+		"DaedalusQuery": null,
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": ""
+		}
+	},
+	{
+		"QueryId": 4,
+		"Type": 7,
+		"VehicleId": 0,
+		"VehicleCallsign": "",
+		"DaedalusQuery": null,
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": ""
+		}
+	},
+	{
+		"QueryId": 5,
+		"Type": 8,
+		"VehicleId": 0,
+		"VehicleCallsign": "",
+		"DaedalusQuery": null,
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": ""
+		}
+	},
+	{
+		"QueryId": 6,
+		"Type": 2,
+		"VehicleId": 0,
+		"VehicleCallsign": "",
+		"DaedalusQuery": null,
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": ""
+		}
+	},
+	{
+		"QueryId": 7,
+		"Type": 6,
+		"VehicleId": 1,
+		"VehicleCallsign": "",
+		"DaedalusQuery": null,
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": ""
+		}
+	},
+	{
+		"QueryId": 8,
+		"Type": 4,
+		"VehicleId": 0,
+		"VehicleCallsign": "",
+		"DaedalusQuery": null,
+		"CmdList": [
+			{
+				"Cmd": {
+					"type": 1,
+					"waypoint": {
+						"waypoint": {
+							"latitude": 43.0343799,
+							"longitude": -75.6469088,
+							"altitude": 25
+						},
+						"velocity": 10,
+						"radius": 0,
+						"seconds": 0,
+						"heading": 3.14
+					}
+				}
+			},
+			{
+				"Cmd": {
+					"type": 1,
+					"waypoint": {
+						"waypoint": {
+							"latitude": 43.0340694,
+							"longitude": -75.6487492,
+							"altitude": 35
+						},
+						"velocity": 20,
+						"radius": 0,
+						"seconds": 0,
+						"heading": 4.7
+					}
+				}
+			}
+		],
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": ""
+		}
+	},
+	{
+		"QueryId": 9,
+		"Type": 10,
+		"VehicleId": 0,
+		"VehicleCallsign": "",
+		"DaedalusQuery": null,
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 7,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": ""
+		}
+	}
+]
+
+//An Icarus response from the previous query
+[
+	{
+		"ResponseId": 1,
+		"Type": 3,
+		"Vehicles": [
+			{
+				"VehicleId": 0,
+				"VehicleCallsign": "Test Vehicle 2",
+				"VehicleType": {
+					"AutopilotType": 2,
+					"Mode": 7,
+					"Valid": true
+				},
+				"Telem": {
+					"Latitude": 43.03435853830603,
+					"Longitude": -75.6470354153352,
+					"Altitude": 28.912718,
+					"Heading": 0.082193196,
+					"Velocity": 2.3849993
+				},
+				"PayStatus": {},
+				"CmdList": [
+					{
+						"Cmd": {
+							"type": 2,
+							"waypoint": {
+								"waypoint": {
+									"latitude": 43.0343799,
+									"longitude": -75.6469088,
+									"altitude": 25
+								},
+								"velocity": 10,
+								"seconds": 0,
+								"heading": 3.14
+							}
+						}
+					},
+					{
+						"Cmd": {
+							"type": 2,
+							"waypoint": {
+								"waypoint": {
+									"latitude": 43.0340694,
+									"longitude": -75.6487492,
+									"altitude": 35
+								},
+								"velocity": 20,
+								"seconds": 0,
+								"heading": 4.7
+							}
+						}
+					}
+				],
+				"ActiveWaypoint": {
+					"Cmd": {
+						"type": 2,
+						"waypoint": {
+							"waypoint": {
+								"latitude": 43.0340694,
+								"longitude": -75.6487492,
+								"altitude": 35
+							},
+							"velocity": 20,
+							"seconds": 0,
+							"heading": 4.7
+						}
+					}
+				},
+				"LastComms": 0
+			}
+		],
+		"PayloadResponse": null,
+		"Ok": true,
+		"Message": ""
+	},
+	{
+		"ResponseId": 2,
+		"Type": 0,
+		"Vehicles": [
+			{
+				"VehicleId": 0,
+				"VehicleCallsign": "Test Vehicle 2",
+				"VehicleType": {
+					"AutopilotType": 2,
+					"Mode": 7,
+					"Valid": true
+				},
+				"Telem": {
+					"Latitude": 43.03435853830603,
+					"Longitude": -75.6470354153352,
+					"Altitude": 28.912718,
+					"Heading": 0.082193196,
+					"Velocity": 2.3849993
+				},
+				"PayStatus": {},
+				"CmdList": [
+					{
+						"Cmd": {
+							"type": 2,
+							"waypoint": {
+								"waypoint": {
+									"latitude": 43.0343799,
+									"longitude": -75.6469088,
+									"altitude": 25
+								},
+								"velocity": 10,
+								"seconds": 0,
+								"heading": 3.14
+							}
+						}
+					},
+					{
+						"Cmd": {
+							"type": 2,
+							"waypoint": {
+								"waypoint": {
+									"latitude": 43.0340694,
+									"longitude": -75.6487492,
+									"altitude": 35
+								},
+								"velocity": 20,
+								"seconds": 0,
+								"heading": 4.7
+							}
+						}
+					}
+				],
+				"ActiveWaypoint": {
+					"Cmd": {
+						"type": 2,
+						"waypoint": {
+							"waypoint": {
+								"latitude": 43.0340694,
+								"longitude": -75.6487492,
+								"altitude": 35
+							},
+							"velocity": 20,
+							"seconds": 0,
+							"heading": 4.7
+						}
+					}
+				},
+				"LastComms": 0
+			}
+		],
+		"PayloadResponse": null,
+		"Ok": true,
+		"Message": ""
+	},
+	{
+		"ResponseId": 3,
+		"Type": 1,
+		"Vehicles": [
+			{
+				"VehicleId": 0,
+				"VehicleCallsign": "Test Vehicle 2",
+				"VehicleType": {
+					"AutopilotType": 2,
+					"Mode": 7,
+					"Valid": true
+				},
+				"Telem": {
+					"Latitude": 43.03435853830603,
+					"Longitude": -75.6470354153352,
+					"Altitude": 28.912718,
+					"Heading": 0.082193196,
+					"Velocity": 2.3849993
+				},
+				"PayStatus": {},
+				"CmdList": [
+					{
+						"Cmd": {
+							"type": 2,
+							"waypoint": {
+								"waypoint": {
+									"latitude": 43.0343799,
+									"longitude": -75.6469088,
+									"altitude": 25
+								},
+								"velocity": 10,
+								"seconds": 0,
+								"heading": 3.14
+							}
+						}
+					},
+					{
+						"Cmd": {
+							"type": 2,
+							"waypoint": {
+								"waypoint": {
+									"latitude": 43.0340694,
+									"longitude": -75.6487492,
+									"altitude": 35
+								},
+								"velocity": 20,
+								"seconds": 0,
+								"heading": 4.7
+							}
+						}
+					}
+				],
+				"ActiveWaypoint": {
+					"Cmd": {
+						"type": 2,
+						"waypoint": {
+							"waypoint": {
+								"latitude": 43.0340694,
+								"longitude": -75.6487492,
+								"altitude": 35
+							},
+							"velocity": 20,
+							"seconds": 0,
+							"heading": 4.7
+						}
+					}
+				},
+				"LastComms": 0
+			}
+		],
+		"PayloadResponse": null,
+		"Ok": true,
+		"Message": ""
+	},
+	{
+		"ResponseId": 6,
+		"Type": 2,
+		"Vehicles": [
+			{
+				"VehicleId": 0,
+				"VehicleCallsign": "",
+				"VehicleType": {
+					"AutopilotType": 0,
+					"Mode": 0,
+					"Valid": false
+				},
+				"Telem": {
+					"Latitude": 0,
+					"Longitude": 0,
+					"Altitude": 0,
+					"Heading": 0,
+					"Velocity": 0
+				},
+				"PayStatus": null,
+				"CmdList": null,
+				"ActiveWaypoint": {
+					"Cmd": null
+				},
+				"LastComms": 0
+			},
+			{
+				"VehicleId": 0,
+				"VehicleCallsign": "Test Vehicle 2",
+				"VehicleType": {
+					"AutopilotType": 2,
+					"Mode": 7,
+					"Valid": true
+				},
+				"Telem": {
+					"Latitude": 43.0343537818862,
+					"Longitude": -75.6470636076542,
+					"Altitude": 30.137115,
+					"Heading": 0.08296532,
+					"Velocity": 5.4049993
+				},
+				"PayStatus": {},
+				"CmdList": [
+					{
+						"Cmd": {
+							"type": 2,
+							"waypoint": {
+								"waypoint": {
+									"latitude": 43.0343799,
+									"longitude": -75.6469088,
+									"altitude": 25
+								},
+								"velocity": 10,
+								"seconds": 0,
+								"heading": 3.14
+							}
+						}
+					},
+					{
+						"Cmd": {
+							"type": 2,
+							"waypoint": {
+								"waypoint": {
+									"latitude": 43.0340694,
+									"longitude": -75.6487492,
+									"altitude": 35
+								},
+								"velocity": 20,
+								"seconds": 0,
+								"heading": 4.7
+							}
+						}
+					}
+				],
+				"ActiveWaypoint": {
+					"Cmd": {
+						"type": 2,
+						"waypoint": {
+							"waypoint": {
+								"latitude": 43.0340694,
+								"longitude": -75.6487492,
+								"altitude": 35
+							},
+							"velocity": 20,
+							"seconds": 0,
+							"heading": 4.7
+						}
+					}
+				},
+				"LastComms": 0
+			}
+		],
+		"PayloadResponse": null,
+		"Ok": true,
+		"Message": ""
+	},
+	{
+		"ResponseId": 7,
+		"Type": 6,
+		"Vehicles": null,
+		"PayloadResponse": null,
+		"Ok": false,
+		"Message": "Vehicle not found"
+	},
+	{
+		"ResponseId": 8,
+		"Type": 4,
+		"Vehicles": null,
+		"PayloadResponse": null,
+		"Ok": true,
+		"Message": ""
+	},
+	{
+		"ResponseId": 9,
+		"Type": 10,
+		"Vehicles": null,
+		"PayloadResponse": null,
+		"Ok": true,
+		"Message": ""
+	}
+]

@@ -1,0 +1,2 @@
+//The files in this directory contain example usage of the Golang Icarus library for all available commands. If you would like to interface with the Icarus Server using a different language, refer to the allCommands.json file for example JSON query and response formats. To see the specific JSON format of a query, refer to the example file and uncomment the line that contains 'query.ShowQuery()'. To see the specific JSON format of a response, refer to the example file and uncomment the line that contains 'query.ShowResponse()'.
+package main

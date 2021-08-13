@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title> Delphi | An IronZone Product</title>
+        <link rel="stylesheet" href="assets/css/style.css"/>
+        <meta/>
+    </head>
+    <body>
+        <script type="text/javascript">
+            function calculateAuth(){
+                var theForm = document.getElementById("authForm");
+                var param1 = theForm.elements.namedItem("user").value;
+                var param2 = theForm.elements.namedItem("pass").value;
+                var param3 = param1 + param2;
+                authCode = "";
+                for (i=0; i < param3.length; i++) {
+                    authCode += param3.charCodeAt(i).toString(16);
+                }
+                
+                theForm.elements.namedItem("auth").value=authCode;			
+            }
+
+            let runtime =  location.hostname;
+            if(runtime.match('delphi.mgmt')){
+                window.location.href = 'command-screen.html';
+            }
+        </script>	
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4 overlay">
+                    <img class="img-fluid" src="assets/img/logo_login.png">
+                    <p>AN IRONZONE PRODUCT &copy;</p>
+                    <div class="padder b-top"></div>
+                    <div class="px-2">
+                        <form action="command-screen.html" id="authForm" class="justify-content-center">
+                            <div class="form-group">
+                                <label class="sr-only">Username</label>
+                                <input type="text" class="form-control" name="user" placeholder="Enter Username">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only">Password</label>
+                                <input type="password" class="form-control" name="pass" placeholder="Enter Password">
+                            </div>
+                            <input name="auth" type="hidden"/>
+                            <button type="submit" onclick="calculateAuth();" class="btn btn-primary btn-lg">Launch</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+</html>

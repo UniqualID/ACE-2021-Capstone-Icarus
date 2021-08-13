@@ -1,0 +1,865 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<style>
+	 h1 {counter-reset:section;}
+	 h2 {counter-reset:subsection;}
+	 h3 {counter-reset:subsubsection;}
+	 h2:before
+	 {
+	     counter-increment:section;
+	     content:counter(section) ". ";
+	     font-weight:bold;
+	 }
+	 h3:before 
+	 {
+	     counter-increment:subsection;
+	     content:counter(section) "." counter(subsection) " ";
+	 }
+	 h4:before 
+	 {
+	     counter-increment:subsubsection;
+	     content:counter(section) "." counter(subsection) "." counter(subsubsection) " ";
+	 }
+
+	</style>
+    </head>
+    <body>
+	<h1>Icarus Server Version 7.3.1</h1>
+	<a href="https://127.0.0.1:9443/">Home</a><br>
+	<a href="https://127.0.0.1:9443/login.html">Login</a><br>
+	<a href="https://127.0.0.1:9443/static/">Static Files</a><br>
+	<a href="https://127.0.0.1:9443/help.html">Help</a><br>
+	<br>
+	<div id="index">
+	    <div>
+		<a href="#1">1 Message Format Description</a>
+	    </div>
+	    <div>
+		<a href="#1-1">1.1 Icarus Client Query</a>
+	    </div>
+	    <div>
+		<a href="#1-2">1.2 Icarus Server Response</a>
+	    </div>
+
+	    <div>
+		<a href="#2">2 API Commands</a>
+	    </div>
+	    <div>
+		<a href="#2-1">2.1 Navigation and Control</a>
+	    </div>
+	    <div>
+		<a href="#2-1-1">2.1.1 Add Vehicle</a>
+	    </div>
+	    <div>
+		<a href="#2-1-2">2.1.2 Remove Vehicle</a>
+	    </div>
+	    <div>
+		<a href="#2-1-3">2.1.3 Vehicle Status</a>
+	    </div>
+	    <div>
+		<a href="#2-1-4">2.1.4 Set Vehicle Mode</a>
+	    </div>
+	    <div>
+		<a href="#2-1-5">2.1.5 Get Vehicle Waypoints</a>
+	    </div>
+	    <div>
+		<a href="#2-1-6">2.1.6 Navigate to location</a>
+	    </div>
+	    <div>
+		<a href="#2-2">2.2 Payload Systems</a>
+	    </div>
+	    <div>
+		<a href="#2-2-1">2.2.1 Configure/Load Payloads</a>
+	    </div>
+	    <div>
+		<a href="#2-2-2">2.2.2 Enable Payload</a>
+	    </div>
+	    <div>
+		<a href="#2-2-3">2.2.3 Payload Status</a>
+	    </div>
+	    <div>
+		<a href="#2-2-4">2.2.4 Execute Payload</a>
+	    </div>
+	</div>
+	<div>
+	    <div>
+		<div id="1">
+		    <h2>Message Format Description</h2>
+		    Icarus Server is a web API based C2 application for unmanned 
+vehicles using the C3PO C2 protocol. Icarus is a programatic API that is
+ listening at wss://addr:9443/api/v1 by default.
+		    <div id="1-1">
+			<h3>Icarus Client Query</h3>
+			The API expects JSON formatted data consisting of an array of queries
+ from a secure websocket connection in the following format (see below 
+for example fully formed JSON queries of all available commands):
+			<h5>Icarus Client Query Message</h5>
+			<pre>  [
+      IcarusQuery{},
+      IcarusQuery{}
+  ]
+			</pre>
+
+			An IcarusQuery has the following format:
+			<h5>IcarusQuery Format</h5>
+			<pre>  {
+    "QueryId": int,            //Unique query ID
+    "Type": int,               //The type of the query (see below)
+    "VehicleId": int,          //The vehicle ID of the vehicle to interact with
+    "VehicleCallsign": string, //The textual name of the vehicle
+    "Daedalus": DaedlausQuery, //A payload query that is sent to the vehicle's payload system (see low)
+    "CmdList": c3po.Command[], //A list of C3PO commands to send to the vehicle
+    "VConfig": VehicleConfig   //The configuration that holds connection information for a given vecle (see below)
+  }
+			</pre>
+			
+			<h5>QueryType</h5>
+			<pre>  SingleVehicleStatus = 0
+  AllVehicleStatus    = 1
+  WaypointList        = 2
+  NewVehicle          = 3
+  Goto                = 4
+  PayloadQuery        = 5
+  RemoveVehicle       = 6
+  StartStatusStream   = 7
+  EndStatusStream     = 8
+  Error               = 9
+  SetMode             = 10
+  Update              = 11
+			</pre>
+
+			<h5>VehicleConfig Format</h5>
+			<pre>  {
+    "Ip": string,            //The IPv4 address of the vehicle
+    "C3poPort": string,      //The C3PO port of the vehicle
+    "DaedalusPort": string,  //The Daedalus payload system port of the vehicle
+    "NavMode": int           //The mode of the vehicle (see below)
+    "ProxyMode": int,        //The encryption proxy mode to use for the vehicle connection
+    "ProxyConfig": string[], //The encryption keys for proxy modes (array index corresponds to proxy mode)
+    "DaedalusCert": string,  //The TLS certificate used to authenticate to the payload systems on the vehicle
+    "DaedalusKey": string,   //The TLS key used to authenticate to the payload systems on the vehicle
+    "TeamId": int            //The team ID of the vehicle (this is set during initial configuration)
+  }
+
+			</pre>
+
+			<h5>NavMode</h5>
+			<pre>  TAKE_OFF   = 1
+  NAVIGATION = 7
+  LAND_NOW   = 8
+			</pre>
+
+			<h5>DaedalusQuery Format</h5>
+			<pre>  {
+    "Type": DaedalusType,               //The type of payload query (see below) 
+    "Configurations": PayloadStatus[],  //A list of payload configurations (see below)
+    "PayloadID": int,                   //The targeted payload
+    "Enabled": bool,                    //Enable/Disable a payload
+    "Action": int                       //During execution, what action to take
+  }
+			</pre>
+			<h5>DaedalusType</h5>
+			<pre>  Configure  = 0
+  Enable     = 1
+  Status     = 2
+  Execute    = 3
+  Unknown    = 4
+			</pre>
+
+			<h5>PayloadStatus Format</h5>
+			<pre>  {
+    "Id": int,         //Payload ID (see below)
+    "Resources": int,  //Number of resources a payload has
+    "Name": string,    //A string name of the payload 
+    "Enabled": bool,   //Wether a payload is enabled or disabled
+    "Parameters": null //Currently unused for query(is map[string]-&gt;float64)
+  }  
+			</pre>
+
+			<h5>Payload IDs</h5>
+			<pre>InvalidPayload = 0  //Invalid payload
+AtG            = 3  //Air to Ground bomb
+Camera         = 4  //Camera
+Fuel           = 5  //Fuel
+Infrastructure = 6  //Unused for vehicles
+Chem           = 7  //Chemical weapon
+ChemRemed      = 8  //Chemical weapon remediation
+Radar          = 9  //Air-based radar (only show vehicles in the air)
+AtA            = 10 //Air to Air missile
+InfRadar       = 11 //All seeing radar (shows all vehicles and infrastructure in the air or on the ground)
+GroundRadar    = 12 //Ground-based radar (only shows vehicles or infrastructure on the ground )
+			</pre>
+		    </div>
+		    <div id="1-2">
+			<h3>Icarus Server Response</h3>
+			When a valid query is received and processed, the Icarus Server will respond with JSON data in the following format:
+			<pre>  [
+    IcarusResponse{},
+    IcarusResponse{}
+  ]
+			</pre>
+			An IcarusResponse has the following format:
+			<h5>IcarusResponse Format</h5>
+			<pre>  {
+    "ResponseId": int,                   //Unique response ID (This corresponds to the associated QueryId of the query)
+    "Type": int,                         //This value will mirror the QueryType from the query unless an error occured
+    "Vehicles": VehicleStatus[],         //An array of vehicle status objects corresponding to the attached vehicles of the system (see below)
+    "PayloadResponse": DaedalusResponse, //A response from the payload system (see below)
+    "Ok": bool,                          //Indicates a successful query
+    "Message": string                    //A string message indicating any errors or other information useful to human users
+  }
+			</pre>
+
+			<h5>VehicleStatus Format</h5>
+			<pre>  {
+    "VehicleId": int,                   //The Icarus system's ID of a vehicle (This can be retrieved with a get status request)
+    "VehicleCallsign": string,          //The textual name of the vehicle
+    "VehicleType": c3po.Vehicle,        //An integer that designates the vehicle type (0: fixed-wing, 1: multi-rotor, 2: surface)
+    "Telem": Telemetry,                 //The telemetry of the vehicle (see below)
+    "PayStatus": map[int]PayloadStatus, //A map of payload ID to the current status of the payload
+    "CmdList": c3po.Command[],          //An array of C3PO commands received from the vehicle
+    "ActiveWaypoint": c3po.Command,     //The current C3PO target for the vehicle
+    "LastComms": int,                   //The number of seconds since a successful C3PO query to the vehicle
+    "VConfig": VehicleConfig            //The configuration information of the vehicle
+  }
+			</pre>
+
+			<h5>Telemetry Format</h5>
+			<pre>  {
+    "Latitude": float,  //The current latitude of the vehicle in decimal format
+    "Longitude": float, //The current longitude of the vehicle in decimal format
+    "Altitude": float,  //The current altitude of the vehicle in meters above vehicle starting location
+    "Heading": float,   //The current heading of the vehicle in degrees
+    "Velocity": float   //The current velocity of the vehicle in m/s
+  }
+
+			</pre>
+
+			<h5>DaedalusResponse Format</h5>
+			<pre>{
+  "Type": DaedalusType,            //The type of response corresponding to the query (see above)
+  "ErrorCode": int,                //An integer error code
+  "Error": string,                 //A human readable error message
+  "Status": PayloadStatus[],       //A list of the current status of payloads included in the response (see above)
+  "File": string[],                //A list of file names and locations that have been retrieved by the payload system (e.g. a picture from the camera)
+  "Parameters": map[string]float64 //A map of string to float that is currently only used by the radar systems (a radar ping response will include a string with "type lat lon alt head" mapped to a unique vehicle ID)
+}
+			</pre>
+		    </div>
+
+		</div>
+		<div id="2">
+		    <h2>API Commands</h2>
+		    The Icarus Server client library is written in <a href="http://golang.org/">Go</a>.
+ Install the icarusServer-version-dev.deb package to get access to the 
+client library. Client interface library documentation can be found <a href="https://127.0.0.1:9443/apidoc.html">here</a>.
+ A better formatted version of the API documentation is included in the 
+icarusServer-version-dev.deb package. Use Go's built in godoc command to
+ view interactive package documenation. Below are examples of valid JSON
+ if the user does not want to use the Go library. These messages are all
+ pulled from the  included example files in the icarus development 
+library. They can also be created by any JSON formatting library if the 
+user prefers another language or library. The below examples show the 
+library call that created the JSON object as well as the resulting JSON.
+ 
+		    <div id="2-1">
+			<h3>Navigation and Control</h3>
+			<div id="2-1-1">
+			    <h4>Add Vehicle</h4>
+			    Add Vehicle directs Icarus Server to attempt to connect to a new 
+vehicle located at the given location. If that vehicle (IP/Port 
+combination) already exists on the Icarus system, it will update other 
+information such as encryption proxy codes or callsign. 
+			    <pre>  query := icarus.NewQuery("127.0.0.1", "9443")
+  addSeq := query.AddNewVehicle("127.0.0.1", "5001", "Test Vehicle", "44444", 0, make([]string, 1), defaultCert, defaultKey, 0)
+
+[
+	{
+		"QueryId": 0,
+		"Type": 3,
+		"VehicleId": 0,
+		"TeamId": 0,
+		"VehicleCallsign": "Test Vehicle",
+		"Daedalus": {
+			"Type": 0,
+			"Configurations": null,
+			"PayloadID": 0,
+			"Enabled": false,
+			"Action": 0
+		},
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "127.0.0.1",
+			"C3poPort": "5001",
+			"DaedalusPort": "44444",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": [
+				""
+			],
+			"DaedalusCert": "-----BEGIN CERTIFICATE-----\nMIIC9TCCAd2gAwIBAgIRAKRQOLvrvmORBJxJKkhCpWgwDQYJKoZIhvcNAQELBQAw\nEjEQMA4GA1UEChMHQWNtZSBDbzAeFw0xOTAxMDkxNzQ1NTdaFw0yMDAxMDkxNzQ1\nNTdaMBIxEDAOBgNVBAoTB0FjbWUgQ28wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAw\nggEKAoIBAQDGzdsktG2DGiQEt7ce1sWlcSc1QNbpLcRemcrGxJKw2JeWYY42R5Le\n+umtLV/xy0+ZIA47iHETj0IFFYjWdixmz5/yHnnnJbz8uKinbk3eTmaR6y+EwSAp\ngFjXFYjRgif4wPk0qnkgHaI+TJXn2dbBnpv0cX34aUKwaCa/qh0XEZ2nqmjjeowx\nmqpD4etICnaMKdJg2Z+da/YG8ExFnwYpzNS9QdfujAxHJ7DoMhPZnyc/sCmaBq+X\neAZbMHtWFuv/24lA/KyJBmCEQGp2x9tn+HmM89SQOj1yOwOqZB87+rjENhp87rgh\nMD4vB93/Mzk48tC1LYlr7cLoBh22tskRAgMBAAGjRjBEMA4GA1UdDwEB/wQEAwIF\noDATBgNVHSUEDDAKBggrBgEFBQcDATAMBgNVHRMBAf8EAjAAMA8GA1UdEQQIMAaH\nBH8AAAEwDQYJKoZIhvcNAQELBQADggEBAKYVTX6fzjOU63QxdtSs9Ot6GdAqaknQ\nbaTiRnAsXJuRCDZpRIEQKFECC7tdEBbyCh5FiyjpVqxn+U2/OcdNHPYxdHRevRWM\nvmNqxeOjha62Bp/JKoN0WR/NfZ7oSHFQYm5kGxTSt6n/BKovWOHI4je0PHD/YITt\nXw5IgIEPDS2eecE+jrHBU596X1jeHSuk+XdQ9Hmo1WFYE9UK7985Oy77+zaNSKdu\nZbBWN877w5AMdmswrC6HcDCXY0Sb3Noadfl9VcDqD69hq0vWPqAomrbjyyTUQCY3\nru4kYaW0u8509KHlpN6ixQWmGAmVhMWtf0g1kPpzJ9HihRtAYUp5Jj4=\n-----END CERTIFICATE-----\n",
+			"DaedalusKey": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpgIBAAKCAQEAxs3bJLRtgxokBLe3HtbFpXEnNUDW6S3EXpnKxsSSsNiXlmGO\nNkeS3vrprS1f8ctPmSAOO4hxE49CBRWI1nYsZs+f8h555yW8/Liop25N3k5mkesv\nhMEgKYBY1xWI0YIn+MD5NKp5IB2iPkyV59nWwZ6b9HF9+GlCsGgmv6odFxGdp6po\n43qMMZqqQ+HrSAp2jCnSYNmfnWv2BvBMRZ8GKczUvUHX7owMRyew6DIT2Z8nP7Ap\nmgavl3gGWzB7Vhbr/9uJQPysiQZghEBqdsfbZ/h5jPPUkDo9cjsDqmQfO/q4xDYa\nfO64ITA+Lwfd/zM5OPLQtS2Ja+3C6AYdtrbJEQIDAQABAoIBAQCMQh4TFkyRCzdQ\nMME8O7Bz2ZIc6yL0njqFt6EtfPA1XooMKcWom/SN5p5IdNPVBmihEtGXxNpqP08H\nwTqqe/M1kdQ5gLDmmGRuNGWgwpyjc9K/rhr3YT2sqgWDsYi2r0o+IP9w3bjZJK8b\nnvLAAZuXPKyw2AVU5gaL6N81p/IgHCoQ6GAkE19Bk2EK/vRoSKtmZsmsUY3RrezC\nHTSX4R4it2eMXBAxEF6stPK0tkv2BvOItoe5BGfWnd4VG2okVcHFkRPiaIiz60iy\n02m6hei2dTKRe/GxaNNDNW8jNqTyJ4ZbUK8MeFVyCmFe+Zu8/LLF6bffj46HE00u\nyWovzFMxAoGBANq5gT27iGukc2MgXDc/yLKcwmXTU7hGH7TRBCu11Ms9fgInCsrz\nx9SRhI5KvysOVe80uPdtyoMx9+I/hzDDNBj0IrIXlO3tpgs26dqUN20CqRbepGwA\naDXxy2D2lD4EHm1pDHU5SXngUECO1fyb9ErG4qeIdE4cfQ8h6ZhRblQNAoGBAOiv\nQvVNvfEm7Qz1BnCuwBTJfkScTJqLuel525c5PIj68w/B6D/cbYaKXr5kSFKroht9\n8hr4lSHawLCAiBHc4mzXmyI1enxTH1+Sck2nzLxOWCqhExzmpNoKLI0T+Xhy0XH1\ndBQuD7QBdWsP4Y+shBdw/ehVPRqmwqY94Lgr5HQVAoGBAKWNhaJ5QK/hIKlmBAaZ\nk8qF1qqGAzdWdIdDMbn3/mH7YFY2wPeO/7EIl+Gv9/SZ/Dd7m4lEo+UbvDmWxjgF\neHhuyZgtOz/AAk84uFcGmtE7E0tJKADLahVyt/LjkJ9ENNexjIlp3BCQ1Y2Xz6ZN\nUOIMmeAe65F4BLygeZQeBrk9AoGBAOPyxmrgBUMY+kOmSu/bEkuK9Ysrf5QrbC8A\n9RHZvacICVQXh3oAbL/QEG7+eSecAsxh/utTOW4YCose765oMN2l/tFtiJgBKowL\nQLU4vMaBDbh9Yeb/QOJl8y0mM1A/U1YLuvMGCNY0U55VyYhh3mnEhMm1r43LbodD\nuUFTppPdAoGBAMHfXeOBXNGaCJf9wAF+qkfTG17z+rplO1ny9vX8p31i3F3wMJG0\nrDkznuYCa6PqBeav2UjbsfeqkynBggKM0wqMUcrSSCzKJEpaOjdaq1fw92Wf4tgq\naJWMolGAClXedrb1jV2zZgl9xwi8kG1Y9EL4uVuCz2k03dFGuznMTW2v\n-----END RSA PRIVATE KEY-----\n",
+			"TeamId": 0
+		}
+	}
+]
+			    </pre>
+
+			</div>
+			<div id="2-1-2">
+			    <h4>Remove Vehicle</h4>
+			    Remove vehicle directs Icarus Server to stop querying the given vehicle and to remove it from all internal systems. 
+			    <pre>  query := icarus.NewQuery("127.0.0.1", "9443")
+  removeSeq := query.RemoveVehicle(0)
+
+[
+	{
+		"QueryId": 1,
+		"Type": 6,
+		"VehicleId": 0,
+		"TeamId": 0,
+		"VehicleCallsign": "",
+		"Daedalus": {
+			"Type": 0,
+			"Configurations": null,
+			"PayloadID": 0,
+			"Enabled": false,
+			"Action": 0
+		},
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": "",
+			"TeamId": 0
+		}
+	}
+]
+			    </pre>
+
+			</div>
+			<div id="2-1-3">
+			    <h4>Vehicle Status</h4>
+			    The Icarus Server is able to return status information in 
+multiple forms. The first is a standard query/response. When a 'status' 
+or 'statusall' message is received, the server will respond with a 
+single message containing the current status of the requested vehicle or
+ all vehicles respectively. The second type of status is a status 
+stream. When this method is requested, the server expects the websocket 
+to remain open and it will send a status message back to the client 
+regularly until it receives a stop status stream message from the 
+client. This can be useful when a client wants regular updates of a 
+vehicle's statuswithout having the overhead of multiple status requests.
+			</div>
+			<div id="2-1-3-1">
+			    <h5>Standard Status Query</h5>
+			    This query has two forms. The first is a 'statusall' message that
+ returns the current status of all vehicles connected to the server. The
+ second is a vehicle specific status that only returns the status of a 
+single vehicle.
+
+			    <h6>Status All</h6>
+			    <pre>  query := icarus.NewQuery("127.0.0.1", "9443")
+  statSeq := query.GetAllVehicleStatus()
+
+[
+	{
+		"QueryId": 0,
+		"Type": 1,
+		"VehicleId": 0,
+		"TeamId": 0,
+		"VehicleCallsign": "",
+		"Daedalus": {
+			"Type": 0,
+			"Configurations": null,
+			"PayloadID": 0,
+			"Enabled": false,
+			"Action": 0
+		},
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": "",
+			"TeamId": 0
+		}
+	}
+]
+			    </pre>
+
+			    <h6>Status Vehicle</h6>
+			    <pre>  query := icarus.NewQuery("127.0.0.1", "9443")
+  statSeq := query.GetVehicleStatus(0)
+
+[
+	{
+		"QueryId": 0,
+		"Type": 0,
+		"VehicleId": 0,
+		"TeamId": 0,
+		"VehicleCallsign": "",
+		"Daedalus": {
+			"Type": 0,
+			"Configurations": null,
+			"PayloadID": 0,
+			"Enabled": false,
+			"Action": 0
+		},
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": "",
+			"TeamId": 0
+		}
+	}
+]
+			    </pre>
+
+			</div>
+			<div id="2-1-3-2">
+			    <h5>Status Stream Query</h5>
+			    A status stream differs from a standard status query because the 
+connection remains open after the initial query and response. The server
+ continues to send status information about the requested vehicle to the
+ client until a stop stream message is received. A status stream can 
+only send the status of a single vehicle, but the server will respond 
+appropriately to multiple concurrent status stream requests for 
+different vehicles.
+
+			    <h6>Start Status Stream</h6>
+			    <pre>  query := icarus.NewQuery("127.0.0.1", "9443")
+  statSeq := query.StartStatusStream(0)
+
+[
+	{
+		"QueryId": 0,
+		"Type": 7,
+		"VehicleId": 0,
+		"TeamId": 0,
+		"VehicleCallsign": "",
+		"Daedalus": {
+			"Type": 0,
+			"Configurations": null,
+			"PayloadID": 0,
+			"Enabled": false,
+			"Action": 0
+		},
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": "",
+			"TeamId": 0
+		}
+	}
+]
+			    </pre>
+
+			    <h6>Stop Status Stream</h6>
+			    <pre>  query := icarus.NewQuery("127.0.0.1", "9443")
+  query.StopStatusStream(0)
+
+[
+	{
+		"QueryId": 1,
+		"Type": 8,
+		"VehicleId": 0,
+		"TeamId": 0,
+		"VehicleCallsign": "",
+		"Daedalus": {
+			"Type": 0,
+			"Configurations": null,
+			"PayloadID": 0,
+			"Enabled": false,
+			"Action": 0
+		},
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": "",
+			"TeamId": 0
+		}
+	}
+]
+			    </pre>
+
+			</div>
+			<div id="2-1-4">
+			    <h4>Set Vehicle Mode</h4>
+			    Set vehicle mode directs Icarus Server to change the mode of a 
+given vehicle. Available modes are LAND_NOW, TAKE_OFF, and NAVIGATION. 
+TAKE_OFF will launch it from the ground, but the vehicle will not go to 
+the first waypoint until it is in NAVIGATION mode. 
+			    <pre>query := icarus.NewQuery("127.0.0.1", "9443")
+landSeq := query.SetNavMode(0, icarus.LAND_NOW)
+
+[
+	{
+		"QueryId": 0,
+		"Type": 10,
+		"VehicleId": 0,
+		"TeamId": 0,
+		"VehicleCallsign": "",
+		"Daedalus": {
+			"Type": 0,
+			"Configurations": null,
+			"PayloadID": 0,
+			"Enabled": false,
+			"Action": 0
+		},
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 8,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": "",
+			"TeamId": 0
+		}
+	}
+]
+			    </pre>
+
+			</div>
+			<div id="2-1-5">
+			    <h4>Get Vehicle Waypoints</h4>
+			    Get vehicle waypoints instructs Icarus Server to retrieve the list of configured waypoints from the given vehicle.
+			    <pre>  query := icarus.NewQuery("127.0.0.1", "9443")
+  statSeq := query.GetWaypointList(0)
+
+[
+	{
+		"QueryId": 0,
+		"Type": 2,
+		"VehicleId": 0,
+		"TeamId": 0,
+		"VehicleCallsign": "",
+		"Daedalus": {
+			"Type": 0,
+			"Configurations": null,
+			"PayloadID": 0,
+			"Enabled": false,
+			"Action": 0
+		},
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": "",
+			"TeamId": 0
+		}
+	}
+]
+			    </pre>
+
+			</div>
+			<div id="2-1-6">
+			    <h4>Navigate to location</h4>
+			    The go to command instructs Icarus Server to upload a set of 
+waypoints to the given vehicle. This list of waypoints will replace the 
+current waypoints on the vehicle and it will start to navigate to the 
+first waypoint as soon as it is put into NAVIGATION mode.
+			    
+			    <pre>  query := icarus.NewQuery("127.0.0.1", "9443")
+  cmdList := icarus.AddCmd(nil, icarus.GOTO, 43.0343799, -75.6469088, 25, 10, 0, 0, 3.14)
+  cmdList = icarus.AddCmd(cmdList, icarus.GOTO, 43.0340694, -75.6487492, 35, 20, 0, 0, 4.7)
+  gotoSeq := query.Goto(0, cmdList)
+
+[
+	{
+		"QueryId": 0,
+		"Type": 4,
+		"VehicleId": 0,
+		"TeamId": 0,
+		"VehicleCallsign": "",
+		"Daedalus": {
+			"Type": 0,
+			"Configurations": null,
+			"PayloadID": 0,
+			"Enabled": false,
+			"Action": 0
+		},
+		"CmdList": [
+			{
+				"Cmd": {
+					"type": 1,
+					"waypoint": {
+						"waypoint": {
+							"latitude": 43.0343799,
+							"longitude": -75.6469088,
+							"altitude": 25
+						},
+						"velocity": 10,
+						"radius": 0,
+						"seconds": 0,
+						"heading": 3.14
+					}
+				}
+			},
+			{
+				"Cmd": {
+					"type": 1,
+					"waypoint": {
+						"waypoint": {
+							"latitude": 43.0340694,
+							"longitude": -75.6487492,
+							"altitude": 35
+						},
+						"velocity": 20,
+						"radius": 0,
+						"seconds": 0,
+						"heading": 4.7
+					}
+				}
+			}
+		],
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": "",
+			"TeamId": 0
+		}
+	}
+]
+			    </pre>
+
+			</div>
+		    </div>
+		    <div id="2-2">
+			<h3>Payload Systems</h3>
+			Users control vehicle payload systems using the same client library 
+as navigation C2. If the library is not used, the below JSON messages 
+can be used as templates for creating the JSON directly. 
+			<div id="2-2-1">
+			    <h4>Configure/Load Payloads</h4>
+			    When a configure payload message is sent to a vehicle, multiple 
+systems are checked. First, the vehicle confirms that the payload is 
+valid for configuration (this prevents an ISR vehicle that should only 
+have radar and a camera from loading air-to-air weapons). If the payload
+ is valid, the vehicle checks to see if that payload is already loaded 
+or not. If not loaded, the vehicle loads the payload with up to the 
+resources requested in the message (this is dependent on the resources 
+available at the air base). If the payload is already loaded on the 
+vehicle, it will add up to the resources in the message onto the payload
+ system.
+
+			    <pre>  query := icarus.NewQuery("127.0.0.1", "9443")
+  configs := icarus.AddPayloadConfig(nil, "payload1", 3, 1, true)
+  configs = icarus.AddPayloadConfig(configs, "payload2", 10, 1, true)
+  configSeq := query.ConfigurePayloads(0, configs)
+
+[
+	{
+		"QueryId": 0,
+		"Type": 5,
+		"VehicleId": 0,
+		"TeamId": 0,
+		"VehicleCallsign": "",
+		"Daedalus": {
+			"Type": 0,
+			"Configurations": [
+				{
+					"Id": 3,
+					"Resources": 1,
+					"Name": "payload1",
+					"Enabled": true,
+					"Parameters": null
+				},
+				{
+					"Id": 10,
+					"Resources": 1,
+					"Name": "payload2",
+					"Enabled": true,
+					"Parameters": null
+				}
+			],
+			"PayloadID": 0,
+			"Enabled": false,
+			"Action": 0
+		},
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": "",
+			"TeamId": 0
+		}
+	}
+]
+			    </pre>
+			</div>
+			<div id="2-2-2">
+			    <h4>Enable Payload</h4>
+			    The enable payload message will arm or disarm a payload according
+ to the message parameters. An enabled payload will respond to all 
+execute queries by performing the requested action. A disabled payload 
+will return an error stating that it is not currently enabled.
+
+			    <pre>  query := icarus.NewQuery("127.0.0.1", "9443")
+  enableSeq := query.EnablePayload(0, 3, false)
+
+[
+	{
+		"QueryId": 0,
+		"Type": 5,
+		"VehicleId": 0,
+		"TeamId": 0,
+		"VehicleCallsign": "",
+		"Daedalus": {
+			"Type": 1,
+			"Configurations": null,
+			"PayloadID": 3,
+			"Enabled": false,
+			"Action": 0
+		},
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": "",
+			"TeamId": 0
+		}
+	}
+]
+			    </pre>
+			</div>
+			<div id="2-2-3">
+			    <h4>Payload Status</h4>
+			    A payload status message returns the current state of the 
+requested payload. If a payload ID of '0' is given, the server will 
+respond with the status of all the payloads for the given vehicle.
+			    <pre>  query := icarus.NewQuery("127.0.0.1", "9443")
+  statusSeq := query.StatusPayload(0, 0)
+
+[
+	{
+		"QueryId": 0,
+		"Type": 5,
+		"VehicleId": 0,
+		"TeamId": 0,
+		"VehicleCallsign": "",
+		"Daedalus": {
+			"Type": 2,
+			"Configurations": null,
+			"PayloadID": 0,
+			"Enabled": false,
+			"Action": 0
+		},
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": "",
+			"TeamId": 0
+		}
+	}
+]
+			    </pre>
+			</div>
+			<div id="2-2-4">
+			    <h4>Execute Payload</h4>
+			    Executing a payload initiates the given action on the payload 
+system of the provided vehicle. Action '0' is always the jettison 
+action. This action will remove the payload from the vehicle. It can be 
+used any time the payload is enabled. This is currently the only way to 
+remove a payload. When a payload is jettisoned, the vehicle will be 
+carrying less mass and will burn less fuel, allowing the vehicle to 
+remain in operation longer. Action '1' is the primary payload action 
+(drop weapon for air-to-ground, take picture for camera, etc.). When 
+action '1' is performed on a radar system, the vehicle will return a 
+list of radar pings for any vehicles that are in range.
+			    <pre>  query := icarus.NewQuery("127.0.0.1", "9443")
+  executeSeq := query.ExecutePayload(0, 4, 1)
+
+[
+	{
+		"QueryId": 0,
+		"Type": 5,
+		"VehicleId": 0,
+		"TeamId": 0,
+		"VehicleCallsign": "",
+		"Daedalus": {
+			"Type": 3,
+			"Configurations": null,
+			"PayloadID": 4,
+			"Enabled": false,
+			"Action": 1
+		},
+		"CmdList": null,
+		"VConfig": {
+			"Ip": "",
+			"C3poPort": "",
+			"DaedalusPort": "",
+			"NavMode": 0,
+			"ProxyMode": 0,
+			"ProxyConfig": null,
+			"DaedalusCert": "",
+			"DaedalusKey": "",
+			"TeamId": 0
+		}
+	}
+]
+			    </pre>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	</div>	
+    
+
+</body></html>

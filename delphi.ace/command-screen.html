@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <title> Delphi | An IronZone Product</title>
+        <link rel="stylesheet" href="assets/css/style.css"/>
+        <meta charset="UTF-8">
+
+    </head>
+    <body>
+        <script src="assets/js/lib/jquery.min.js"></script><script src="assets/js/lib/bootstrap.min.js"></script><script src="assets/js/lib/leaflet-src.js"></script><script src="assets/js/lib/leaflet-fullscreen.min.js"></script>
+        <div class="container-fluid">
+            <div class="modal fade" id="delphiModal" tabindex="-1" role="dialog" aria-labelledby="delphiModal">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modalTitle"></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      </div>
+                      <div class="modal-content" class="contianer-fluid">
+                          <div id="modalBody" style="padding:20px" class="container-fluid">
+
+
+                          </div>
+                       
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row height-full">
+                <div id="sidenav" class="col-1 sidenav" style="display: none;">
+                    <a href="#" onclick="window.map.center()"><img src="assets/img/logo_login_white.png" class="img-fluid"/></a>
+                    <a href="#""><img src="assets/svgs/task.svg" onclick="window.ui.showMission();" class="img-fluid svg-white" alt="Task"></a>
+                    <a href="#"><img src="assets/svgs/drone.svg" onclick="window.ui.showAllVehicles()" class="img-fluid svg-white" alt="Vehicles"></a>
+                    <a href="#"><img src="assets/svgs/base.svg" onclick="window.ui.showAllInfrastructure();" class="img-fluid svg-white" alt="Infrustructure"></a>
+                    <a href="#"><img src="assets/svgs/radar.svg" onclick="window.ui.showAllIads();" class="img-fluid svg-white" alt="Defences"></a>
+                    <a href="#"><img src="assets/svgs/feed.svg" onclick="window.ui.showNewsFeed();" class="img-fluid svg-white" alt="Feed"></a>
+                    <a href="#"><img src="assets/svgs/search.svg" onclick="window.ui.showSearch()" class="img-fluid svg-white" alt="MapMod"></a>
+                    <a href="#"><img src="assets/svgs/oriental.svg" onclick="window.ui.showValinar()" class="img-fluid svg-white" alt="Valinar"></a>
+
+                </div>
+                <div class="col-sm-3" style="display: none;" id="viewScreen">
+                    <div onclick="window.ui.hideSidebar();" style = "top:10px; cursor: pointer; right:30px; font-size: 25px; position: absolute; font-weight: 900;">x</div>
+                    <div class="content" id="viewScreenContent"></div>
+                </div>
+                <div class="col no-pad">
+                    <div id="mapid" style="height:100%; width:100%; margin:auto;">
+                        <div class="leaflet-top leaflet-right">
+                            <div class="leaflet-control">
+                                <div onclick="window.map.toggleVehicles();" class="leaflet-control leaflet-button">
+                                    <img src="assets/svgs/drone.svg"/>
+                                </div>
+                                <div onclick="window.map.toggleInfrastructure();" class="leaflet-control leaflet-button">
+                                    <img src="assets/svgs/base.svg" />
+                                </div>
+                                <div onclick="window.map.toggleIads();" class="leaflet-control leaflet-button">
+                                    <img src="assets/svgs/radar.svg" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="leaflet-top" style="left: 50%; transform: translate(-50%, 0%);">
+                            <div class="text-center text-primary font-weight-bold h5" id="mousePos" style="z-index: 500;">    
+                            </div>
+                            <p>
+                                <div class="alert bg-primary text-white" id="alert" role="alert" style="display: none;">
+                                </div>
+                            </p>
+                        </div>
+                        <!--
+                        <div class="leaflet-bottom leaflet-left">
+                            <div class="leaflet-control">
+                                <div id="soundButton" onclick="pageMap.toggleSounds();" class="leaflet-control leaflet-button">
+                                    <img src="assets/svgs/soundoff.svg"/>
+                                </div>
+                            </div>
+                        </div>
+                    -->
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <script type="module" src="assets/js/DelphiMap.js"></script>
+    </body>
+</html>

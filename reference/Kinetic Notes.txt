@@ -1,0 +1,117 @@
+Resources:
+
+Icarus.html - Documentation for most aspects of kinetic command and control (this is a web page generated when running icarusServer: localhost:9443)
+Icarus.go - The icarusClient package with all icarus abstract data types and functions (generated when icarusClient is installed: /home/user/go/src/git.ironzone.ace/icarus/icarusClient)
+examples - Folder containing several example scripts; useful starting point for script creationg (generated when icarusClient is installed: /home/user/go/src/git.ironzone.ace/icarus/icarusClient)
+
+
+Discoveries:
+
+ISR Max Speed 120 meters/second
+ISR Max Height 16000 meters
+Fuel usage for ISR drone: 10 fuel = 2000 vertical meters
+Bomber Max Speed 90 meters/second
+Fighter Max Speed 165 meters/second
+
+All Drones Fuel Usage: 1 fuel = 105s
+
+AllRadar Distance 43000 meters
+TAKE_OFF Altitude Height 150/200 meters
+
+
+Icarus Datatype Composition:
+
+type VehicleStatus struct 
+	VehicleId uint32
+	VehicleCallsign string
+	VehicleType Vehicle
+        AutopilotType AutopilotType
+            FIXED_WING    AutopilotType = 1
+            ROTOR_CRAFT   AutopilotType = 2
+            SURFACE_CRAFT AutopilotType = 3
+        Mode NavMode
+            TAKE_OFF          NavMode = 1
+            HOME              NavMode = 2
+            RALLY             NavMode = 3
+            LINGER_NOW        NavMode = 4
+            LINGER_WAYPOINT   NavMode = 5
+            FOLLOW_THE_LEADER NavMode = 6
+            NAVIGATION        NavMode = 7
+            LAND_NOW          NavMode = 8
+            LAND_WAYPOINT     NavMode = 9
+            MANUAL_CONTROL    NavMode = 10
+        Valid bool
+	Telem Telemetry
+        Latitude, Longitude         float64
+        Altitude, Heading, Velocity float32
+	PayStatus map[int]PayloadStatus
+        Id PayloadType
+            InvalidPayload      PayloadType = 0
+            AllPayloads                     = 0
+            ThermalLance                    = 3
+            Camera                          = 4
+            Fuel                            = 5
+            Phosphex                        = 7
+            PhosphexRemediation             = 8
+            AirRadar                        = 9
+            AntiMatterMissile               = 10
+            AllRadar                        = 11
+            GroundRadar                     = 12
+            SAM                             = 13
+            Cargo                           = 14
+            SeekerMissile                   = 15
+        Resources int32
+        Name string
+        Enabled bool
+        Parameters map[string]string
+        Radar map[int32]RadarPing
+            Type          int32
+            Latitude      float64
+            Longitude     float64
+            Altitude      float32
+            Heading       float32
+            StructureType int32
+	CmdList []Cmd
+        Type CmdType `protobuf:"varint,1,req,name=type,enum=c3po.pb.Command_Type" json:"type,omitempty"`
+            GOTO   CmdType = 1
+            LOITER CmdType = 2
+            JUMP   CmdType = 3
+        Waypoint Goto `protobuf:"bytes,2,opt,name=waypoint" json:"waypoint,omitempty"`
+            Waypoint Position `protobuf:"bytes,1,req,name=waypoint" json:"waypoint,omitempty"`
+                Latitude  float64 `protobuf:"fixed64,1,req,name=latitude" json:"latitude,omitempty"`
+                Longitude float64 `protobuf:"fixed64,2,req,name=longitude" json:"longitude,omitempty"`
+                Altitude  float32 `protobuf:"fixed32,3,opt,name=altitude" json:"altitude,omitempty"`
+            Velocity float32  `protobuf:"fixed32,2,opt,name=velocity" json:"velocity,omitempty"`
+            Radius   float32  `protobuf:"fixed32,3,opt,name=radius" json:"radius,omitempty"`
+            Seconds  uint32   `protobuf:"varint,4,opt,name=seconds" json:"seconds,omitempty"`
+            Heading  float32  `protobuf:"fixed32,5,opt,name=heading" json:"heading,omitempty"``
+        Jump *Jump `protobuf:"bytes,3,opt,name=jump" json:"jump,omitempty"`
+            Target uint32 `protobuf:"varint,1,req,name=target" json:"target,omitempty"`
+            Count  uint32 `protobuf:"varint,2,opt,name=count" json:"count,omitempty"`
+	ActiveWaypoint  Command
+        Type CmdType `protobuf:"varint,1,req,name=type,enum=c3po.pb.Command_Type" json:"type,omitempty"`
+            GOTO   CmdType = 1
+            LOITER CmdType = 2
+            JUMP   CmdType = 3
+        Waypoint Goto `protobuf:"bytes,2,opt,name=waypoint" json:"waypoint,omitempty"`
+            Waypoint Position `protobuf:"bytes,1,req,name=waypoint" json:"waypoint,omitempty"`
+                Latitude  float64 `protobuf:"fixed64,1,req,name=latitude" json:"latitude,omitempty"`
+                Longitude float64 `protobuf:"fixed64,2,req,name=longitude" json:"longitude,omitempty"`
+                Altitude  float32 `protobuf:"fixed32,3,opt,name=altitude" json:"altitude,omitempty"`
+            Velocity float32  `protobuf:"fixed32,2,opt,name=velocity" json:"velocity,omitempty"`
+            Radius   float32  `protobuf:"fixed32,3,opt,name=radius" json:"radius,omitempty"`
+            Seconds  uint32   `protobuf:"varint,4,opt,name=seconds" json:"seconds,omitempty"`
+            Heading  float32  `protobuf:"fixed32,5,opt,name=heading" json:"heading,omitempty"`
+        Jump *Jump `protobuf:"bytes,3,opt,name=jump" json:"jump,omitempty"`
+            Target uint32 `protobuf:"varint,1,req,name=target" json:"target,omitempty"`
+            Count  uint32 `protobuf:"varint,2,opt,name=count" json:"count,omitempty"`
+	LastComms uint64
+	Available bool
+	VConfig VehicleConfig
+        Ip, C3poPort, DaedalusPort         string
+        NavMode                            NavMode
+        ProxyMode                          int
+        ProxyConfig                        []string
+        DaedalusCert, DaedalusKey          []byte
+        TeamId                             uint32
+        C3poUpdateTime, DaedalusUpdateTime int32

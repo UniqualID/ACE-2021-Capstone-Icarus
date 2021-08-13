@@ -1,0 +1,2 @@
+iff_id,callsign,vehicle_ip,c2_port,payload_port,payload_security,security_mode,mode1,mode2,mode3,mode4,mode5,mode6,mode7
+2095,KIRINKI-101,10.59.144.230,10312,10312,f,0,0b,92ed97482b1ba84a08b0ddead35105c3,3dcb3d31c2a80a55836708a8c4bec45c,74b25ec689fbacbee88488a7ab398ed6,68b4f9baaa556ad410a063c3e6acae1b,a7c87c6c47b28e50033c518c3395dedc,19bea01a6b34df1f4d8a704d8e84daca

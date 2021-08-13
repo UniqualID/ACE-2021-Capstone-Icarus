@@ -1,0 +1,157 @@
+{
+  "exercise": {
+    "id": 16,
+    "name": "South Canada Sea",
+    "minimum_latitude": 45.202037,
+    "maximum_latitude": 50.910707,
+    "minimum_longitude": -69.08571,
+    "maximum_longitude": -59.5136
+  },
+  "infrastructure": [
+    {
+      "id": 4000,
+      "name": "ENEMY AIRBASE 1",
+      "team": "Halycon",
+      "type": "Airbase",
+      "hitpoints": 100,
+      "latitude": 49.8368,
+      "longitude": -64.2868,
+      "color": "red"
+    },
+    {
+      "id": 4001,
+      "name": "ENEMY AIRBASE 2",
+      "team": "Halycon",
+      "type": "Airbase",
+      "hitpoints": 100,
+      "latitude": 49.3325,
+      "longitude": -62.902,
+      "color": "red"
+    },
+    {
+      "id": 4002,
+      "name": "ENEMY ROG--FUEL 1",
+      "team": "Halycon",
+      "type": "Depot",
+      "hitpoints": 100,
+      "latitude": 49.6605,
+      "longitude": -63.6695,
+      "color": "red"
+    },
+    {
+      "id": 4003,
+      "name": "ENEMY ROG--FUEL 2",
+      "team": "Halycon",
+      "type": "Depot",
+      "hitpoints": 100,
+      "latitude": 49.3175,
+      "longitude": -62.9425,
+      "color": "red"
+    },
+    {
+      "id": 4004,
+      "name": "ENEMY ROG--FUEL 3",
+      "team": "Halycon",
+      "type": "Depot",
+      "hitpoints": 100,
+      "latitude": 49.1418,
+      "longitude": -62.2238,
+      "color": "red"
+    },
+    {
+      "id": 4005,
+      "name": "ENEMY DATACENTER 1",
+      "team": "Halycon",
+      "type": "Datacenter",
+      "hitpoints": 100,
+      "latitude": 49.476,
+      "longitude": -63.5111,
+      "color": "red"
+    },
+    {
+      "id": 4006,
+      "name": "ENEMY FORT 1",
+      "team": "Halycon",
+      "type": "Fort",
+      "hitpoints": 100,
+      "latitude": 49.7725,
+      "longitude": -63.8525,
+      "color": "red"
+    },
+    {
+      "id": 4007,
+      "name": "ENEMY FORT 2",
+      "team": "Halycon",
+      "type": "Fort",
+      "hitpoints": 100,
+      "latitude": 49.559,
+      "longitude": -63.104,
+      "color": "red"
+    },
+    {
+      "id": 4008,
+      "name": "ENEMY FORT 3",
+      "team": "Halycon",
+      "type": "Fort",
+      "hitpoints": 100,
+      "latitude": 49.406,
+      "longitude": -64.2868,
+      "color": "red"
+    },
+    {
+      "id": 4009,
+      "name": "ENEMY NETWORK NODE 1",
+      "team": "Halycon",
+      "type": "NETWORK-NODE",
+      "hitpoints": 100,
+      "latitude": 49.6,
+      "longitude": -63.4142,
+      "color": "red"
+    },
+    {
+      "id": 4010,
+      "name": "ENEMY NETWORK NODE 2",
+      "team": "Halycon",
+      "type": "NETWORK-NODE",
+      "hitpoints": 100,
+      "latitude": 49.2675,
+      "longitude": -62.4995,
+      "color": "red"
+    },
+    {
+      "id": 4011,
+      "name": "ENEMY INSTALLATION 1",
+      "team": "Halycon",
+      "type": "INSTALLATION",
+      "hitpoints": 100,
+      "latitude": 49.73,
+      "longitude": -64.037,
+      "color": "red"
+    },
+    {
+      "id": 4012,
+      "name": "ENEMY INSTALLATION 2",
+      "team": "Halycon",
+      "type": "INSTALLATION",
+      "hitpoints": 100,
+      "latitude": 49.66,
+      "longitude": -63.555,
+      "color": "red"
+    }
+  ],
+  "vehicles": [
+    {
+      "id": 4999,
+      "name": "UNIQUE_NAME",
+      "team": "Valinar",
+      "type": "ISR",
+      "alive": true,
+      "latitude": 48.2466,
+      "longitude": -63.544,
+      "altitude": 0,
+      "heading": 0,
+      "role": "FIGHTER",
+      "color": "red"
+    }
+  ]
+}

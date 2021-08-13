@@ -1,0 +1,3 @@
+VehicleID,TargetLat,TargetLon,TargetAlt,PayloadID,PayloadAction
+0,43.0354,-75.6573,30,4,1
+1,43.0354,-75.6573,35,4,1

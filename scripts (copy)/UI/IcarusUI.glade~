@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.2 -->
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <object class="GtkMenu">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment1">
+    <property name="upper">100</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment2">
+    <property name="upper">165</property>
+    <property name="step-increment">5</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment3">
+    <property name="upper">16000</property>
+    <property name="step-increment">10</property>
+    <property name="page-increment">100</property>
+  </object>
+  <object class="GtkWindow" id="window1">
+    <property name="can-focus">False</property>
+    <signal name="destroy" handler="on_window1_destroy" swapped="no"/>
+    <child>
+      <object class="GtkFixed">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="margin-bottom">18</property>
+        <child>
+          <!-- n-columns=9 n-rows=10 -->
+          <object class="GtkGrid">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="row-spacing">1</property>
+            <property name="column-spacing">1</property>
+            <property name="row-homogeneous">True</property>
+            <child>
+              <object class="GtkSpinButton" id="VEL">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="tooltip-text" translatable="yes">Enter desired velocity.</property>
+                <property name="max-length">3</property>
+                <property name="text" translatable="yes">90</property>
+                <property name="placeholder-text" translatable="yes">90</property>
+                <property name="input-purpose">digits</property>
+                <property name="orientation">vertical</property>
+                <property name="adjustment">adjustment2</property>
+                <property name="climb-rate">1</property>
+                <property name="snap-to-ticks">True</property>
+                <property name="numeric">True</property>
+                <property name="update-policy">if-valid</property>
+                <property name="value">165</property>
+              </object>
+              <packing>
+                <property name="left-attach">3</property>
+                <property name="top-attach">2</property>
+                <property name="height">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="width-request">40</property>
+                <property name="height-request">35</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">VEL</property>
+                <property name="yalign">0</property>
+              </object>
+              <packing>
+                <property name="left-attach">3</property>
+                <property name="top-attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="width-request">45</property>
+                <property name="height-request">33</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">ALT</property>
+                <property name="yalign">0</property>
+              </object>
+              <packing>
+                <property name="left-attach">4</property>
+                <property name="top-attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="ALT">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="tooltip-text" translatable="yes">Enter desired altitude.</property>
+                <property name="max-length">6</property>
+                <property name="text" translatable="yes">500</property>
+                <property name="placeholder-text" translatable="yes">1000</property>
+                <property name="input-purpose">digits</property>
+                <property name="orientation">vertical</property>
+                <property name="adjustment">adjustment3</property>
+                <property name="climb-rate">1</property>
+                <property name="snap-to-ticks">True</property>
+                <property name="numeric">True</property>
+                <property name="update-policy">if-valid</property>
+                <property name="value">500</property>
+              </object>
+              <packing>
+                <property name="left-attach">4</property>
+                <property name="top-attach">2</property>
+                <property name="height">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Take Off</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Launch target drone or team.</property>
+                <property name="image-position">right</property>
+                <signal name="clicked" handler="button_launch" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Land</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Land target drone or team.</property>
+                <signal name="clicked" handler="button_land" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Load</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Fuel target drone or team.</property>
+                <signal name="clicked" handler="button_loadpayload" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">7</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="AMT">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="tooltip-text" translatable="yes">Enter fuel amount.</property>
+                <property name="max-length">3</property>
+                <property name="text" translatable="yes">100</property>
+                <property name="placeholder-text" translatable="yes">100</property>
+                <property name="input-purpose">digits</property>
+                <property name="adjustment">adjustment1</property>
+                <property name="climb-rate">1</property>
+                <property name="snap-to-ticks">True</property>
+                <property name="numeric">True</property>
+                <property name="update-policy">if-valid</property>
+                <property name="value">100</property>
+              </object>
+              <packing>
+                <property name="left-attach">8</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Status</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Get status of target drone or team.</property>
+                <signal name="clicked" handler="button_status" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">3</property>
+                <property name="top-attach">1</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Go</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Send target drone or team to specified position</property>
+                <signal name="clicked" handler="button_goto" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">3</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Go &amp; Land</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Send target drone or team  to specified position and land.</property>
+                <signal name="clicked" handler="button_gotoland" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">2</property>
+                <property name="top-attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="width-request">82</property>
+                <property name="height-request">36</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">Drone Management</property>
+                <attributes>
+                  <attribute name="font-desc" value="Source Code Pro Semi-Bold 14"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">0</property>
+                <property name="width">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="width-request">82</property>
+                <property name="height-request">36</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">Action</property>
+                <attributes>
+                  <attribute name="font-desc" value="Source Code Pro Semi-Bold 14"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="left-attach">5</property>
+                <property name="top-attach">0</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="TGT_ID">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="tooltip-text" translatable="yes">Enter a drone or a team number.</property>
+                <property name="max-length">4</property>
+                <property name="caps-lock-warning">False</property>
+                <property name="primary-icon-stock">gtk-cdrom</property>
+                <property name="placeholder-text" translatable="yes">Target IFF # ID</property>
+                <property name="input-purpose">digits</property>
+              </object>
+              <packing>
+                <property name="left-attach">5</property>
+                <property name="top-attach">1</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Fire</property>
+                <property name="width-request">110</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <signal name="clicked" handler="button_payload_fire" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">7</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Jettison</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <signal name="clicked" handler="button_payload_jettison" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">8</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkRadioButton" id="ANTIMATTER">
+                <property name="label" translatable="yes">Anti-Matter (Air)</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">False</property>
+                <property name="halign">start</property>
+                <property name="draw-indicator">True</property>
+              </object>
+              <packing>
+                <property name="left-attach">7</property>
+                <property name="top-attach">3</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkRadioButton" id="LANCE">
+                <property name="label" translatable="yes">Thermal Lance (Ground)</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">False</property>
+                <property name="halign">start</property>
+                <property name="draw-indicator">True</property>
+                <property name="group">ANTIMATTER</property>
+              </object>
+              <packing>
+                <property name="left-attach">7</property>
+                <property name="top-attach">4</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkRadioButton" id="SEEKER">
+                <property name="label" translatable="yes">Seeker Missile</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">False</property>
+                <property name="halign">start</property>
+                <property name="draw-indicator">True</property>
+                <property name="group">ANTIMATTER</property>
+              </object>
+              <packing>
+                <property name="left-attach">7</property>
+                <property name="top-attach">5</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkRadioButton" id="PHOSPHEX">
+                <property name="label" translatable="yes">Phosphex</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">False</property>
+                <property name="halign">start</property>
+                <property name="active">True</property>
+                <property name="draw-indicator">True</property>
+                <property name="group">ANTIMATTER</property>
+              </object>
+              <packing>
+                <property name="left-attach">7</property>
+                <property name="top-attach">6</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkRadioButton" id="PHOSPHEXREM">
+                <property name="label" translatable="yes">Phosphex Remediation</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">False</property>
+                <property name="halign">start</property>
+                <property name="active">True</property>
+                <property name="draw-indicator">True</property>
+                <property name="group">ANTIMATTER</property>
+              </object>
+              <packing>
+                <property name="left-attach">7</property>
+                <property name="top-attach">7</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkRadioButton" id="CAMERA">
+                <property name="label" translatable="yes">Camera</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">False</property>
+                <property name="halign">start</property>
+                <property name="active">True</property>
+                <property name="draw-indicator">True</property>
+                <property name="group">ANTIMATTER</property>
+              </object>
+              <packing>
+                <property name="left-attach">7</property>
+                <property name="top-attach">8</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="ID">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="max-length">3</property>
+                <property name="width-chars">0</property>
+                <property name="primary-icon-stock">gtk-remove</property>
+                <property name="placeholder-text" translatable="yes"># ID</property>
+              </object>
+              <packing>
+                <property name="left-attach">2</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="TYPE">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="active">0</property>
+                <property name="has-frame">False</property>
+                <items>
+                  <item id="ANCALAGON" translatable="yes">ANCALAGON</item>
+                  <item id="BOMBADIL" translatable="yes">BOMBADIL</item>
+                  <item id="GLAURUNG" translatable="yes">GLAURUNG</item>
+                  <item id="KIRINKI" translatable="yes">KIRINKI</item>
+                  <item id="SAGROTH" translatable="yes">SAGROTH</item>
+                  <item id="THORONDOR" translatable="yes">THORONDOR</item>
+                </items>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">1</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText">
+                <property name="name">Coordinates</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="tearoff-title" translatable="yes">[LAT] [LONG]</property>
+                <property name="has-entry">True</property>
+                <items>
+                  <item translatable="yes">ANGBAND-AB</item>
+                  <item id="3" translatable="yes">EDHELLOND-AB</item>
+                  <item id="2" translatable="yes">EDORAS-AB</item>
+                  <item id="8" translatable="yes">EGLAREST-AB</item>
+                  <item id="1" translatable="yes">ELVENKING-AB</item>
+                  <item translatable="yes">RHUN-AB</item>
+                  <item id="7" translatable="yes">SAURON-AB</item>
+                  <item translatable="yes">SAURUMAN-AB</item>
+                  <item id="6" translatable="yes">SCATHA-AB</item>
+                  <item id="4" translatable="yes">SHELOB-AB</item>
+                  <item id="5" translatable="yes">SMAUG-AB</item>
+                  <item translatable="yes"> </item>
+                </items>
+                <child internal-child="entry">
+                  <object class="GtkEntry" id="GPS">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="max-length">21</property>
+                    <property name="primary-icon-name">applications-internet</property>
+                    <property name="placeholder-text" translatable="yes">[LAT]  [LON]</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">2</property>
+                <property name="width">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Follow (WIP)</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Follow 200 meters above a target.</property>
+                <signal name="clicked" handler="button_follow" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">5</property>
+                <property name="top-attach">2</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Follow and Fire</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Follow 200 meters above a target.</property>
+                <signal name="clicked" handler="button_followfire" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">5</property>
+                <property name="top-attach">3</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="width-request">82</property>
+                <property name="height-request">40</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">Payload</property>
+                <attributes>
+                  <attribute name="font-desc" value="Source Code Pro Semi-Bold 14"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="left-attach">7</property>
+                <property name="top-attach">0</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="ADMIN">
+                <property name="label" translatable="yes">Admin Mode</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">False</property>
+                <property name="draw-indicator">True</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">7</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkRadioButton" id="FUEL">
+                <property name="label" translatable="yes">Fuel</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">False</property>
+                <property name="halign">start</property>
+                <property name="draw-indicator">True</property>
+                <property name="group">ANTIMATTER</property>
+              </object>
+              <packing>
+                <property name="left-attach">7</property>
+                <property name="top-attach">9</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Emg Land</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Land target drone or team.</property>
+                <signal name="clicked" handler="button_emgland" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">2</property>
+                <property name="top-attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Refuel All</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <signal name="clicked" handler="button_refuelall" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">5</property>
+                <property name="top-attach">9</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="x">207</property>
+          </packing>
+        </child>
+        <child>
+          <!-- n-columns=2 n-rows=8 -->
+          <object class="GtkGrid">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="row-spacing">1</property>
+            <property name="column-spacing">1</property>
+            <property name="row-homogeneous">True</property>
+            <child>
+              <object class="GtkButton" id="1">
+                <property name="label" translatable="yes">Status</property>
+                <property name="width-request">82</property>
+                <property name="height-request">33</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Get the status of all vehicles.</property>
+                <signal name="clicked" handler="button_status_all" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">1</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Disconnect</property>
+                <property name="width-request">82</property>
+                <property name="height-request">33</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Disconnect all vehicles from Icarus server.</property>
+                <signal name="clicked" handler="button_disconnect" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Connect</property>
+                <property name="width-request">82</property>
+                <property name="height-request">33</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Connect all vehicles from assets.csv to Icarus server.</property>
+                <signal name="clicked" handler="button_connect" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="width-request">82</property>
+                <property name="height-request">40</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">Asset Management</property>
+                <attributes>
+                  <attribute name="font-desc" value="Source Code Pro Semi-Bold 14"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">0</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkRadioButton" id="REAL">
+                <property name="label" translatable="yes">Real</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">False</property>
+                <property name="active">True</property>
+                <property name="draw-indicator">True</property>
+                <property name="group">TEST</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkRadioButton" id="TEST">
+                <property name="label" translatable="yes">Test</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">False</property>
+                <property name="active">True</property>
+                <property name="draw-indicator">True</property>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="has-entry">True</property>
+                <items>
+                  <item id="&lt;Enter ID&gt;" translatable="yes">127.0.0.1</item>
+                  <item translatable="yes">127.0.0.1</item>
+                </items>
+                <child internal-child="entry">
+                  <object class="GtkEntry" id="IP">
+                    <property name="can-focus">False</property>
+                    <property name="text" translatable="yes">127.0.0.1</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">4</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="width-request">82</property>
+                <property name="height-request">40</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">Routes</property>
+                <attributes>
+                  <attribute name="font-desc" value="Source Code Pro Semi-Bold 14"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">5</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="ROUTES">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="primary-icon-stock">gtk-file</property>
+                <property name="placeholder-text" translatable="yes">[FILENAME].csv</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">6</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Send</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <signal name="clicked" handler="button_send" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">7</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkAdjustment" id="adjustment4">
+    <property name="upper">100</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkListStore" id="liststore1">
+    <columns>
+      <!-- column-name ID -->
+      <column type="gint"/>
+      <!-- column-name NAME -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">0</col>
+        <col id="1" translatable="yes">Test</col>
+      </row>
+    </data>
+  </object>
+</interface>
